@@ -426,7 +426,7 @@
             box-shadow: var(--shadow);
             padding: 1rem;
             text-align: center;
-            min-height: 250px;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -448,7 +448,7 @@
 
         .ad-placeholder {
             width: 100%;
-            height: 100%;
+            height: 200px;
             background-color: var(--gray-light);
             border: 1px dashed var(--gray);
             border-radius: 4px;
@@ -896,6 +896,10 @@
             margin: 2rem 0;
             text-align: center;
             transition: transform 0.3s ease;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .ad-box:hover {
@@ -918,6 +922,107 @@
             max-width: 100%;
             border-radius: var(--radius);
         }
+
+        /* Tutorials Page Styles */
+        .tutorials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .tutorial-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .tutorial-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .tutorial-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tutorial-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .tutorial-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .tutorial-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tutorial-card .btn {
+            margin-top: auto;
+        }
+
+        .tutorial-content {
+            margin-top: 2rem;
+        }
+
+        .tutorial-step {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .tutorial-step:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .tutorial-image {
+            max-width: 100%;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            box-shadow: var(--shadow);
+        }
     </style>
 </head>
 <body>
@@ -932,6 +1037,7 @@
                     <ul>
                         <li><a href="#" class="active-page" id="homeLink">Home</a></li>
                         <li><a href="#" id="toolsLink">Tools</a></li>
+                        <li><a href="#" id="tutorialsLink">Tutorials</a></li>
                         <li><a href="#" id="aboutLink">About Us</a></li>
                         <li><a href="#" id="contactLink">Contact</a></li>
                     </ul>
@@ -1024,11 +1130,17 @@
                     
                     <!-- Ad Box 1 -->
                     <div class="ad-box">
-                        <h3>Premium PDF Tools</h3>
-                        <div class="ad-box-content">
-                            <p>Upgrade to our premium plan for unlimited PDF processing and advanced features!</p>
-                            <a href="#" class="btn btn-success">Learn More</a>
-                        </div>
+                        <div class="ad-label">Advertisement</div>
+                        <!-- Google AdSense Ad Unit -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                             data-ad-slot="1234567890"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                     
                     <div class="compressor-card">
@@ -1048,11 +1160,17 @@
                     
                     <!-- Ad Box 2 -->
                     <div class="ad-box">
-                        <h3>Need Help With PDFs?</h3>
-                        <div class="ad-box-content">
-                            <p>Check out our comprehensive PDF guides and tutorials to master document management.</p>
-                            <a href="#" class="btn">View Tutorials</a>
-                        </div>
+                        <div class="ad-label">Advertisement</div>
+                        <!-- Google AdSense Ad Unit -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                             data-ad-slot="0987654321"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                 </div>
                 
@@ -1134,6 +1252,132 @@
                     <h3>PDF to Excel</h3>
                     <p>Extract tables from PDF to Excel spreadsheets</p>
                     <div class="btn">Use Tool</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorials Page Content -->
+        <div id="tutorialsPage" class="page-content" style="display: none;">
+            <h2>PDF Tutorials & Guides</h2>
+            <p>Learn how to make the most of our PDF tools with these step-by-step tutorials and guides.</p>
+            
+            <div class="tutorials-grid">
+                <div class="tutorial-card" data-tutorial="compression">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                    <h3>How to Compress PDF Files</h3>
+                    <p>Learn the best practices for reducing PDF file size while maintaining quality.</p>
+                    <div class="btn">View Tutorial</div>
+                </div>
+                <div class="tutorial-card" data-tutorial="merging">
+                    <i class="fas fa-object-group"></i>
+                    <h3>Merging Multiple PDFs</h3>
+                    <p>Step-by-step guide to combining several PDF documents into one.</p>
+                    <div class="btn">View Tutorial</div>
+                </div>
+                <div class="tutorial-card" data-tutorial="splitting">
+                    <i class="fas fa-cut"></i>
+                    <h3>Splitting PDF Documents</h3>
+                    <p>Learn how to extract specific pages or split PDFs into multiple files.</p>
+                    <div class="btn">View Tutorial</div>
+                </div>
+                <div class="tutorial-card" data-tutorial="conversion">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>PDF Conversion Guide</h3>
+                    <p>Convert PDFs to Word, Excel, and other formats with ease.</p>
+                    <div class="btn">View Tutorial</div>
+                </div>
+                <div class="tutorial-card" data-tutorial="security">
+                    <i class="fas fa-lock"></i>
+                    <h3>PDF Security Best Practices</h3>
+                    <p>Protect your PDF documents with passwords and encryption.</p>
+                    <div class="btn">View Tutorial</div>
+                </div>
+                <div class="tutorial-card" data-tutorial="optimization">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Optimizing PDFs for Web</h3>
+                    <p>Tips for creating PDFs that load quickly on websites.</p>
+                    <div class="btn">View Tutorial</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorial Content Pages -->
+        <div id="tutorialPages" style="display: none;">
+            <!-- PDF Compression Tutorial -->
+            <div id="compressionTutorial" class="page-content">
+                <div class="back-button">
+                    <button class="btn btn-secondary" id="backToTutorials">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Tutorials
+                    </button>
+                </div>
+                <h2>How to Compress PDF Files</h2>
+                <p>Learn how to effectively reduce the size of your PDF documents while maintaining acceptable quality for different use cases.</p>
+                
+                <div class="tutorial-content">
+                    <div class="tutorial-step">
+                        <h3><span class="step-number">1</span> Choose the Right Compression Level</h3>
+                        <p>Our PDF compressor offers three compression levels:</p>
+                        <ul>
+                            <li><strong>Low Compression:</strong> Best for documents where quality is critical (e.g., presentations, portfolios)</li>
+                            <li><strong>Medium Compression:</strong> Ideal for general documents (e.g., reports, manuals)</li>
+                            <li><strong>High Compression:</strong> Suitable for documents where file size is more important than quality (e.g., email attachments)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <h3><span class="step-number">2</span> Upload Your PDF</h3>
+                        <p>Drag and drop your PDF file into the upload area or click to browse your files. The tool supports PDF files up to 100MB in size.</p>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <h3><span class="step-number">3</span> Monitor Compression Progress</h3>
+                        <p>Watch the progress bar as your file is compressed. The time required depends on the file size and your device's capabilities.</p>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <h3><span class="step-number">4</span> Download Your Compressed PDF</h3>
+                        <p>Once compression is complete, click the download button to save your compressed PDF. The file will be automatically saved to your device.</p>
+                    </div>
+                    
+                    <div class="compressor-card">
+                        <h3>Pro Tips for Better Compression</h3>
+                        <ul>
+                            <li>For text-heavy documents, high compression often works well with minimal quality loss</li>
+                            <li>For image-heavy documents, use medium compression to balance quality and file size</li>
+                            <li>Remove unnecessary images or reduce their resolution before compression for better results</li>
+                            <li>Consider splitting large documents into smaller parts if compression alone isn't sufficient</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Merging Tutorial -->
+            <div id="mergingTutorial" class="page-content">
+                <div class="back-button">
+                    <button class="btn btn-secondary" id="backToTutorials2">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Tutorials
+                    </button>
+                </div>
+                <h2>Merging Multiple PDFs</h2>
+                <p>Combine several PDF documents into a single file with our easy-to-use merger tool.</p>
+                
+                <div class="tutorial-content">
+                    <div class="tutorial-step">
+                        <h3><span class="step-number">1</span> Select Your PDF Files</h3>
+                        <p>Click the upload area and select multiple PDF files you want to merge. You can select files in the order you want them to appear in the final document.</p>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <h3><span class="step-number">2</span> Arrange Files (Optional)</h3>
+                        <p>If needed, rearrange the files by dragging them into your preferred order before merging.</p>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <h3><span class="step-number">3</span> Merge and Download</h3>
+                        <p>Click the "Merge PDFs" button and wait for the process to complete. Download your merged PDF when ready.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1224,282 +1468,7 @@
                 </div>
             </div>
 
-            <!-- PDF Merger Tool Page -->
-            <div id="mergerTool" class="tool-page">
-                <div class="back-button">
-                    <button class="btn btn-secondary" id="backToTools2">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Tools
-                    </button>
-                </div>
-                <div class="tool-header">
-                    <i class="fas fa-object-group"></i>
-                    <h2>PDF Merger</h2>
-                </div>
-                <p class="tool-description">Combine multiple PDF files into a single document.</p>
-                
-                <div class="compressor-card">
-                    <div class="upload-area" id="mergerUploadArea">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <div class="upload-text">
-                            <h3>Drag & Drop your PDFs here</h3>
-                            <p>or click to browse files (multiple selection allowed)</p>
-                        </div>
-                        <button class="btn">
-                            <i class="fas fa-folder-open"></i>
-                            Select PDF Files
-                        </button>
-                        <input type="file" class="tool-file-input" accept=".pdf" multiple style="display: none;">
-                    </div>
-                    
-                    <div class="file-list" id="mergerFileList" style="display: none;">
-                        <h4>Selected Files:</h4>
-                        <div id="fileItems"></div>
-                    </div>
-                    
-                    <div class="file-info" id="mergerFileInfo" style="display: none;">
-                        <div class="file-details">
-                            <div>
-                                <strong>Files Selected:</strong> <span class="tool-file-count">0</span>
-                            </div>
-                            <div>
-                                <strong>Total Size:</strong> <span class="tool-total-size">0 MB</span>
-                            </div>
-                        </div>
-                        
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress tool-progress"></div>
-                            </div>
-                            <div class="progress-text">
-                                <span>Merging...</span>
-                                <span class="tool-progress-percent">0%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn tool-process-btn">
-                            <i class="fas fa-object-group"></i>
-                            Merge PDFs
-                        </button>
-                        <button class="btn btn-secondary tool-download-btn" disabled>
-                            <i class="fas fa-download"></i>
-                            Download Merged PDF
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PDF Splitter Tool Page -->
-            <div id="splitterTool" class="tool-page">
-                <div class="back-button">
-                    <button class="btn btn-secondary" id="backToTools3">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Tools
-                    </button>
-                </div>
-                <div class="tool-header">
-                    <i class="fas fa-cut"></i>
-                    <h2>PDF Splitter</h2>
-                </div>
-                <p class="tool-description">Split PDF into multiple files or extract specific pages.</p>
-                
-                <div class="compressor-card">
-                    <div class="upload-area" id="splitterUploadArea">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <div class="upload-text">
-                            <h3>Drag & Drop your PDF here</h3>
-                            <p>or click to browse files</p>
-                        </div>
-                        <button class="btn">
-                            <i class="fas fa-folder-open"></i>
-                            Select PDF File
-                        </button>
-                        <input type="file" class="tool-file-input" accept=".pdf" style="display: none;">
-                    </div>
-                    
-                    <div class="file-info" id="splitterFileInfo" style="display: none;">
-                        <div class="file-details">
-                            <div>
-                                <strong>File:</strong> <span class="tool-file-name">document.pdf</span>
-                            </div>
-                            <div>
-                                <strong>Size:</strong> <span class="tool-file-size">2.4 MB</span>
-                            </div>
-                            <div>
-                                <strong>Pages:</strong> <span class="tool-file-pages">24</span>
-                            </div>
-                        </div>
-                        
-                        <div class="compression-options">
-                            <h3 class="option-title">
-                                <i class="fas fa-cog"></i>
-                                Split Options
-                            </h3>
-                            
-                            <div class="form-group">
-                                <label for="splitOption">How do you want to split?</label>
-                                <select id="splitOption">
-                                    <option value="range">Extract page range</option>
-                                    <option value="every">Split every page</option>
-                                    <option value="odd-even">Split odd/even pages</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group" id="pageRangeGroup">
-                                <label for="pageRange">Page range (e.g., 1-5, 8, 11-13)</label>
-                                <input type="text" id="pageRange" placeholder="1-5">
-                            </div>
-                        </div>
-                        
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress tool-progress"></div>
-                            </div>
-                            <div class="progress-text">
-                                <span>Splitting...</span>
-                                <span class="tool-progress-percent">0%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn tool-process-btn">
-                            <i class="fas fa-cut"></i>
-                            Split PDF
-                        </button>
-                        <button class="btn btn-secondary tool-download-btn" disabled>
-                            <i class="fas fa-download"></i>
-                            Download Split PDFs
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PDF to Word Tool Page -->
-            <div id="wordTool" class="tool-page">
-                <div class="back-button">
-                    <button class="btn btn-secondary" id="backToTools4">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Tools
-                    </button>
-                </div>
-                <div class="tool-header">
-                    <i class="fas fa-file-word"></i>
-                    <h2>PDF to Word Converter</h2>
-                </div>
-                <p class="tool-description">Convert PDF files to editable Word documents.</p>
-                
-                <div class="compressor-card">
-                    <div class="upload-area" id="wordUploadArea">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <div class="upload-text">
-                            <h3>Drag & Drop your PDF here</h3>
-                            <p>or click to browse files</p>
-                        </div>
-                        <button class="btn">
-                            <i class="fas fa-folder-open"></i>
-                            Select PDF File
-                        </button>
-                        <input type="file" class="tool-file-input" accept=".pdf" style="display: none;">
-                    </div>
-                    
-                    <div class="file-info" id="wordFileInfo" style="display: none;">
-                        <div class="file-details">
-                            <div>
-                                <strong>File:</strong> <span class="tool-file-name">document.pdf</span>
-                            </div>
-                            <div>
-                                <strong>Size:</strong> <span class="tool-file-size">2.4 MB</span>
-                            </div>
-                        </div>
-                        
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress tool-progress"></div>
-                            </div>
-                            <div class="progress-text">
-                                <span>Converting to Word...</span>
-                                <span class="tool-progress-percent">0%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn tool-process-btn">
-                            <i class="fas fa-file-word"></i>
-                            Convert to Word
-                        </button>
-                        <button class="btn btn-secondary tool-download-btn" disabled>
-                            <i class="fas fa-download"></i>
-                            Download Word Document
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PDF to Excel Tool Page -->
-            <div id="excelTool" class="tool-page">
-                <div class="back-button">
-                    <button class="btn btn-secondary" id="backToTools5">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Tools
-                    </button>
-                </div>
-                <div class="tool-header">
-                    <i class="fas fa-file-excel"></i>
-                    <h2>PDF to Excel Converter</h2>
-                </div>
-                <p class="tool-description">Extract tables from PDF files to Excel spreadsheets.</p>
-                
-                <div class="compressor-card">
-                    <div class="upload-area" id="excelUploadArea">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <div class="upload-text">
-                            <h3>Drag & Drop your PDF here</h3>
-                            <p>or click to browse files</p>
-                        </div>
-                        <button class="btn">
-                            <i class="fas fa-folder-open"></i>
-                            Select PDF File
-                        </button>
-                        <input type="file" class="tool-file-input" accept=".pdf" style="display: none;">
-                    </div>
-                    
-                    <div class="file-info" id="excelFileInfo" style="display: none;">
-                        <div class="file-details">
-                            <div>
-                                <strong>File:</strong> <span class="tool-file-name">document.pdf</span>
-                            </div>
-                            <div>
-                                <strong>Size:</strong> <span class="tool-file-size">2.4 MB</span>
-                            </div>
-                        </div>
-                        
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress tool-progress"></div>
-                            </div>
-                            <div class="progress-text">
-                                <span>Extracting tables to Excel...</span>
-                                <span class="tool-progress-percent">0%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn tool-process-btn">
-                            <i class="fas fa-file-excel"></i>
-                            Convert to Excel
-                        </button>
-                        <button class="btn btn-secondary tool-download-btn" disabled>
-                            <i class="fas fa-download"></i>
-                            Download Excel File
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <!-- Other tool pages would go here -->
         </div>
 
         <!-- About Us Page Content -->
@@ -1715,12 +1684,15 @@
             // Navigation Elements
             const homeLink = document.getElementById('homeLink');
             const toolsLink = document.getElementById('toolsLink');
+            const tutorialsLink = document.getElementById('tutorialsLink');
             const aboutLink = document.getElementById('aboutLink');
             const contactLink = document.getElementById('contactLink');
             
             // Page Elements
             const homePage = document.getElementById('homePage');
             const toolsPage = document.getElementById('toolsPage');
+            const tutorialsPage = document.getElementById('tutorialsPage');
+            const tutorialPages = document.getElementById('tutorialPages');
             const toolPages = document.getElementById('toolPages');
             const aboutPage = document.getElementById('aboutPage');
             const contactPage = document.getElementById('contactPage');
@@ -1748,10 +1720,11 @@
             // Tool Cards
             const toolCards = document.querySelectorAll('.tool-card');
             const backToTools = document.getElementById('backToTools');
-            const backToTools2 = document.getElementById('backToTools2');
-            const backToTools3 = document.getElementById('backToTools3');
-            const backToTools4 = document.getElementById('backToTools4');
-            const backToTools5 = document.getElementById('backToTools5');
+            
+            // Tutorial Cards
+            const tutorialCards = document.querySelectorAll('.tutorial-card');
+            const backToTutorials = document.getElementById('backToTutorials');
+            const backToTutorials2 = document.getElementById('backToTutorials2');
             
             // Contact Form
             const sendMessageBtn = document.getElementById('sendMessageBtn');
@@ -1764,6 +1737,8 @@
                 // Hide all pages
                 homePage.style.display = 'none';
                 toolsPage.style.display = 'none';
+                tutorialsPage.style.display = 'none';
+                tutorialPages.style.display = 'none';
                 toolPages.style.display = 'none';
                 aboutPage.style.display = 'none';
                 contactPage.style.display = 'none';
@@ -1773,9 +1748,17 @@
                     toolPage.style.display = 'none';
                 });
                 
+                // Hide all tutorial pages
+                document.querySelectorAll('.page-content').forEach(tutorialPage => {
+                    if (tutorialPage.parentElement === tutorialPages) {
+                        tutorialPage.style.display = 'none';
+                    }
+                });
+                
                 // Remove active class from all nav links
                 homeLink.classList.remove('active-page');
                 toolsLink.classList.remove('active-page');
+                tutorialsLink.classList.remove('active-page');
                 aboutLink.classList.remove('active-page');
                 contactLink.classList.remove('active-page');
                 
@@ -1788,6 +1771,10 @@
                     case 'tools':
                         toolsPage.style.display = 'block';
                         toolsLink.classList.add('active-page');
+                        break;
+                    case 'tutorials':
+                        tutorialsPage.style.display = 'block';
+                        tutorialsLink.classList.add('active-page');
                         break;
                     case 'about':
                         aboutPage.style.display = 'block';
@@ -1804,6 +1791,7 @@
                 // Hide all pages
                 homePage.style.display = 'none';
                 toolsPage.style.display = 'none';
+                tutorialsPage.style.display = 'none';
                 aboutPage.style.display = 'none';
                 contactPage.style.display = 'none';
                 
@@ -1819,6 +1807,32 @@
                 // Update navigation
                 homeLink.classList.remove('active-page');
                 toolsLink.classList.remove('active-page');
+                tutorialsLink.classList.remove('active-page');
+                aboutLink.classList.remove('active-page');
+                contactLink.classList.remove('active-page');
+            }
+            
+            function showTutorialPage(tutorialName) {
+                // Hide all pages
+                homePage.style.display = 'none';
+                toolsPage.style.display = 'none';
+                tutorialsPage.style.display = 'none';
+                aboutPage.style.display = 'none';
+                contactPage.style.display = 'none';
+                
+                // Show tutorial pages container
+                tutorialPages.style.display = 'block';
+                
+                // Show the specific tutorial page
+                const tutorialPage = document.getElementById(`${tutorialName}Tutorial`);
+                if (tutorialPage) {
+                    tutorialPage.style.display = 'block';
+                }
+                
+                // Update navigation
+                homeLink.classList.remove('active-page');
+                toolsLink.classList.remove('active-page');
+                tutorialsLink.classList.remove('active-page');
                 aboutLink.classList.remove('active-page');
                 contactLink.classList.remove('active-page');
             }
@@ -1835,6 +1849,11 @@
             toolsLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 showPage('tools');
+            });
+            
+            tutorialsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('tutorials');
             });
             
             aboutLink.addEventListener('click', (e) => {
@@ -1856,30 +1875,30 @@
                 });
             });
             
+            // Tutorial Cards Event Listeners
+            tutorialCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tutorialName = card.getAttribute('data-tutorial');
+                    showTutorialPage(tutorialName);
+                });
+            });
+            
             // Back to Tools Event Listeners
             backToTools.addEventListener('click', (e) => {
                 e.preventDefault();
                 showPage('tools');
             });
             
-            backToTools2.addEventListener('click', (e) => {
+            // Back to Tutorials Event Listeners
+            backToTutorials.addEventListener('click', (e) => {
                 e.preventDefault();
-                showPage('tools');
+                showPage('tutorials');
             });
             
-            backToTools3.addEventListener('click', (e) => {
+            backToTutorials2.addEventListener('click', (e) => {
                 e.preventDefault();
-                showPage('tools');
-            });
-            
-            backToTools4.addEventListener('click', (e) => {
-                e.preventDefault();
-                showPage('tools');
-            });
-            
-            backToTools5.addEventListener('click', (e) => {
-                e.preventDefault();
-                showPage('tools');
+                showPage('tutorials');
             });
             
             // Footer Navigation
