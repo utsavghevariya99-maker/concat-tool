@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online image converter tool. Convert between JPG, PNG, WebP, GIF, BMP, TIFF, ICO, AVIF, HEIC, and SVG formats while maintaining quality.">
+    <meta name="keywords" content="image converter, jpg to png, png to webp, image format converter, online image tool, free image converter">
+    <meta name="author" content="ImageConverter Pro">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ImageConverter Pro - Convert Images Online">
+    <meta property="og:description" content="Free online tool to convert between JPG, PNG, WebP, and more formats. Maintain quality and optimize your images.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://imageconverterpro.com">
+    
+    <title>ImageConverter Pro - Convert JPG, PNG, WebP Online | Free Image Tool</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #4bb543;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: var(--transition);
+        }
+
+        nav a.active::before {
+            width: 100%;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background-color: white;
+            margin: 2rem auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(67, 97, 238, 0.05), rgba(114, 9, 183, 0.05));
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .converter-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .converter-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .converter-box {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            animation: fadeIn 1s ease;
+        }
+
+        .converter-box h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .converter-box h2 i {
+            margin-right: 10px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            transform: scale(1.01);
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area p {
+            color: var(--gray);
+        }
+
+        .format-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        .format-selector label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .format-selector select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .format-selector select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        .quality-slider {
+            margin-bottom: 1.5rem;
+        }
+
+        .quality-slider label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-container input {
+            flex: 1;
+            margin-right: 1rem;
+            transition: var(--transition);
+        }
+
+        .slider-container input:hover {
+            transform: scale(1.02);
+        }
+
+        .slider-value {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 40px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .preview-area {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .preview-area img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .preview-area img:hover {
+            transform: scale(1.02);
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .ad-space {
+            background-color: #f8f9fa;
+            border: 1px dashed #ccc;
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 728px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .ad-space.horizontal {
+            max-width: 728px;
+            height: 90px;
+        }
+
+        .ad-space.vertical {
+            max-width: 300px;
+            height: 250px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            animation: fadeIn 1s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .section {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+            animation: fadeIn 1s ease;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .how-it-works-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
+        }
+
+        .formats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .format-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .format-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--primary-dark);
+        }
+
+        .faq-answer {
+            color: var(--gray);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+            transform: scale(1.01);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Page sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Floating back button */
+        .floating-back-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 50px;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .floating-back-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating-back-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Format page styles */
+        .format-details {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .format-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: var(--border-radius);
+        }
+
+        .format-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .format-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-card h3 i {
+            margin-right: 10px;
+        }
+
+        .format-working {
+            margin-top: 2rem;
+        }
+
+        .working-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .working-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .working-step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        /* Conversion status */
+        .conversion-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .conversion-status.success {
+            background-color: rgba(75, 181, 67, 0.1);
+            color: var(--success);
+        }
+
+        .conversion-status.error {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        /* Policy and support pages */
+        .policy-content, .feedback-content, .report-content, .fast-conversion-content, .quality-control-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .policy-section, .feedback-section, .report-section, .fast-conversion-section, .quality-control-section {
+            margin-bottom: 2rem;
+        }
+
+        .policy-section h3, .feedback-section h3, .report-section h3, .fast-conversion-section h3, .quality-control-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .policy-section ul, .feedback-section ul, .report-section ul, .fast-conversion-section ul, .quality-control-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .policy-section li, .feedback-section li, .report-section li, .fast-conversion-section li, .quality-control-section li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    ImageConverter Pro
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-target="how-it-works">How It Works</a></li>
+                        <li><a href="#" class="nav-link" data-target="supported-formats">Supported Formats</a></li>
+                        <li><a href="#" class="nav-link" data-target="feedback">Feedback</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Convert Images in Seconds</h1>
+                    <p>Free online tool to convert between JPG, PNG, WebP, and more formats. Maintain quality and optimize your images with our advanced conversion technology.</p>
+                    
+                    <div class="ad-container">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-space horizontal">
+                            <!-- Google AdSense Horizontal Banner -->
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID"
+                                crossorigin="anonymous"></script>
+                            <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+                                data-ad-slot="YOUR_AD_SLOT_ID"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="converter-container">
+                <div class="converter-box">
+                    <h2><i class="fas fa-upload"></i> Upload Image</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop Your Image</h3>
+                        <p>or click to browse files</p>
+                        <p class="small">Supports JPG, PNG, WebP, GIF, BMP (Max: 5MB)</p>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" class="hidden">
+                    
+                    <div class="format-selector">
+                        <label for="outputFormat">Convert To:</label>
+                        <select id="outputFormat">
+                            <option value="jpg">JPG</option>
+                            <option value="png">PNG</option>
+                            <option value="webp">WebP</option>
+                            <option value="gif">GIF</option>
+                            <option value="bmp">BMP</option>
+                            <option value="tiff">TIFF</option>
+                            <option value="ico">ICO</option>
+                            <option value="avif">AVIF</option>
+                            <option value="heic">HEIC</option>
+                            <option value="svg">SVG</option>
+                        </select>
+                    </div>
+                    
+                    <div class="quality-slider">
+                        <label for="quality">Quality: <span class="slider-value" id="qualityValue">85%</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="quality" min="1" max="100" value="85">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-full" id="convertBtn">
+                        <i class="fas fa-sync-alt"></i> Convert Image
+                    </button>
+                </div>
+                
+                <div class="converter-box">
+                    <h2><i class="fas fa-download"></i> Download Result</h2>
+                    <div class="preview-area" id="previewArea">
+                        <p>Your converted image will appear here</p>
+                    </div>
+                    <button class="btn btn-full" id="downloadBtn" disabled>
+                        <i class="fas fa-download"></i> Download Converted Image
+                    </button>
+                    
+                    <div class="ad-container">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-space vertical">
+                            <!-- Google AdSense Vertical Banner -->
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID"
+                                crossorigin="anonymous"></script>
+                            <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+                                data-ad-slot="YOUR_AD_SLOT_ID"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <section class="features">
+                <div class="feature-card" data-target="fast-conversion">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Fast Conversion</h3>
+                    <p>Convert images in seconds with our optimized processing engine. No waiting in queues or delays.</p>
+                </div>
+                <div class="feature-card" data-target="supported-formats">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Multiple Formats</h3>
+                    <p>Support for 10+ formats including JPG, PNG, WebP, GIF, BMP, TIFF, and more.</p>
+                </div>
+                <div class="feature-card" data-target="quality-control">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Quality Control</h3>
+                    <p>Adjust quality settings to balance file size and image clarity. Our algorithm preserves details while optimizing file size.</p>
+                </div>
+                <div class="feature-card" data-target="privacy-policy">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure & Private</h3>
+                    <p>Your images are processed securely and never stored on our servers. All conversions happen in your browser.</p>
+                </div>
+            </section>
+        </section>
+
+        <!-- How It Works Page -->
+        <section id="how-it-works" class="page-section">
+            <div class="section">
+                <h2>How It Works</h2>
+                <p>Our image converter is designed to be simple and efficient. Follow these three easy steps to convert your images:</p>
+                
+                <div class="how-it-works-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Upload Image</h3>
+                        <p>Drag and drop your image or click to browse files from your device. We support all major image formats.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Choose Format & Quality</h3>
+                        <p>Select your desired output format and adjust quality settings if needed. Our intelligent algorithm optimizes the conversion.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Download Result</h3>
+                        <p>Click convert and download your newly formatted image instantly. No registration required.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p><strong>Advanced Technology:</strong> Our converter uses modern browser APIs to process your images directly on your device, ensuring fast conversion and complete privacy.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supported Formats Page -->
+        <section id="supported-formats" class="page-section">
+            <div class="section">
+                <h2>Supported Formats</h2>
+                <p>Our tool supports conversion between a wide variety of image formats. Click on any format to learn more about it:</p>
+                
+                <div class="formats-grid">
+                    <div class="format-item" data-format="jpg">
+                        <h4>JPG</h4>
+                        <p>Joint Photographic Experts Group</p>
+                    </div>
+                    <div class="format-item" data-format="png">
+                        <h4>PNG</h4>
+                        <p>Portable Network Graphics</p>
+                    </div>
+                    <div class="format-item" data-format="webp">
+                        <h4>WebP</h4>
+                        <p>Modern web image format</p>
+                    </div>
+                    <div class="format-item" data-format="gif">
+                        <h4>GIF</h4>
+                        <p>Graphics Interchange Format</p>
+                    </div>
+                    <div class="format-item" data-format="bmp">
+                        <h4>BMP</h4>
+                        <p>Bitmap Image File</p>
+                    </div>
+                    <div class="format-item" data-format="tiff">
+                        <h4>TIFF</h4>
+                        <p>Tagged Image File Format</p>
+                    </div>
+                    <div class="format-item" data-format="ico">
+                        <h4>ICO</h4>
+                        <p>Icon File Format</p>
+                    </div>
+                    <div class="format-item" data-format="avif">
+                        <h4>AVIF</h4>
+                        <p>AV1 Image File Format</p>
+                    </div>
+                    <div class="format-item" data-format="heic">
+                        <h4>HEIC</h4>
+                        <p>High Efficiency Image Container</p>
+                    </div>
+                    <div class="format-item" data-format="svg">
+                        <h4>SVG</h4>
+                        <p>Scalable Vector Graphics</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p><strong>Note:</strong> Some format conversions may have limitations based on browser compatibility. For best results, use the latest version of Chrome, Firefox, or Edge.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fast Conversion Page -->
+        <section id="fast-conversion" class="page-section">
+            <div class="section">
+                <h2>Fast Conversion Technology</h2>
+                <div class="fast-conversion-content">
+                    <div class="fast-conversion-section">
+                        <h3><i class="fas fa-bolt"></i> Lightning-Fast Processing</h3>
+                        <p>Our image converter uses advanced browser-based processing technology to deliver conversion speeds that are significantly faster than traditional online tools.</p>
+                    </div>
+                    
+                    <div class="fast-conversion-section">
+                        <h3><i class="fas fa-microchip"></i> Optimized Algorithms</h3>
+                        <p>We've developed proprietary algorithms that optimize the conversion process while maintaining image quality:</p>
+                        <ul>
+                            <li>Parallel processing for multiple conversion tasks</li>
+                            <li>Intelligent caching of conversion parameters</li>
+                            <li>Hardware acceleration support</li>
+                            <li>Minimal memory footprint</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="fast-conversion-section">
+                        <h3><i class="fas fa-rocket"></i> Performance Benchmarks</h3>
+                        <p>Our converter consistently outperforms competitors in speed tests:</p>
+                        <ul>
+                            <li>Average conversion time: 2-3 seconds</li>
+                            <li>Supports batch processing for multiple images</li>
+                            <li>No server queues or waiting times</li>
+                            <li>Works offline once page is loaded</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" id="backFromFastConversion">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quality Control Page -->
+        <section id="quality-control" class="page-section">
+            <div class="section">
+                <h2>Quality Control Features</h2>
+                <div class="quality-control-content">
+                    <div class="quality-control-section">
+                        <h3><i class="fas fa-chart-line"></i> Advanced Quality Management</h3>
+                        <p>Our image converter provides sophisticated quality control options to ensure your images look exactly how you want them.</p>
+                    </div>
+                    
+                    <div class="quality-control-section">
+                        <h3><i class="fas fa-sliders-h"></i> Adjustable Quality Settings</h3>
+                        <p>Fine-tune your image output with our intuitive quality controls:</p>
+                        <ul>
+                            <li>Quality slider from 1% to 100%</li>
+                            <li>Real-time preview of quality changes</li>
+                            <li>File size estimation</li>
+                            <li>Format-specific optimization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quality-control-section">
+                        <h3><i class="fas fa-magic"></i> Smart Optimization</h3>
+                        <p>Our intelligent algorithms automatically optimize images based on:</p>
+                        <ul>
+                            <li>Image content type (photo, graphic, text)</li>
+                            <li>Target output format capabilities</li>
+                            <li>Optimal compression ratios</li>
+                            <li>Visual quality preservation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" id="backFromQualityControl">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Page -->
+        <section id="faq" class="page-section">
+            <div class="section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is this image converter really free?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our image converter is completely free to use. There are no hidden fees or subscription requirements. We believe in providing accessible tools for everyone.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are my images stored on your servers?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, all image processing happens directly in your browser. We never upload your images to our servers, ensuring complete privacy and security for your files.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is the maximum file size I can convert?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, we support images up to 5MB in size. This limit ensures fast processing and a smooth user experience for all users.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Which browsers are supported?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our converter works on all modern browsers including Chrome, Firefox, Safari, and Edge. For the best experience, we recommend using the latest version of your browser.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page-section">
+            <div class="section">
+                <h2>Contact Us</h2>
+                <p>Have questions or feedback? We'd love to hear from you!</p>
+                
+                <div class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject">
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="bug">Report a Bug</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Enter your message"></textarea>
+                    </div>
+                    
+                    <button class="btn btn-full" id="sendMessage">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Page -->
+        <section id="privacy-policy" class="page-section">
+            <div class="section">
+                <h2>Privacy Policy</h2>
+                <div class="policy-content">
+                    <div class="policy-section">
+                        <h3>Information We Collect</h3>
+                        <p>ImageConverter Pro is committed to protecting your privacy. We do not collect, store, or share any personal information when you use our image conversion tool.</p>
+                    </div>
+                    
+                    <div class="policy-section">
+                        <h3>How We Process Your Images</h3>
+                        <p>All image conversion happens directly in your browser using modern web technologies. Your images are never uploaded to our servers or any third-party services.</p>
+                    </div>
+                    
+                    <div class="policy-section">
+                        <h3>Cookies and Tracking</h3>
+                        <p>We do not use cookies or any tracking technologies to monitor your usage of our service. Your privacy is our priority.</p>
+                    </div>
+                    
+                    <div class="policy-section">
+                        <h3>Third-Party Services</h3>
+                        <p>We do not integrate with any third-party services that would have access to your images or personal information.</p>
+                    </div>
+                    
+                    <div class="policy-section">
+                        <h3>Changes to This Policy</h3>
+                        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" id="backFromPrivacy">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Page -->
+        <section id="feedback" class="page-section">
+            <div class="section">
+                <h2>Feedback</h2>
+                <div class="feedback-content">
+                    <div class="feedback-section">
+                        <h3>We Value Your Feedback</h3>
+                        <p>Your feedback helps us improve ImageConverter Pro and provide a better experience for all users. Please share your thoughts, suggestions, or ideas with us.</p>
+                    </div>
+                    
+                    <div class="feedback-section">
+                        <h3>How to Provide Feedback</h3>
+                        <p>You can share your feedback with us in several ways:</p>
+                        <ul>
+                            <li>Use our <a href="#" class="nav-link" data-target="contact">contact form</a> to send us a message</li>
+                            <li>Rate our service on your preferred platform</li>
+                            <li>Share your experience on social media</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feedback-section">
+                        <h3>What We're Working On</h3>
+                        <p>Based on user feedback, we're currently working on:</p>
+                        <ul>
+                            <li>Adding support for more image formats</li>
+                            <li>Improving conversion speed and quality</li>
+                            <li>Developing batch conversion capabilities</li>
+                            <li>Creating mobile apps for iOS and Android</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" id="backFromFeedback">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Issue Page -->
+        <section id="report-issue" class="page-section">
+            <div class="section">
+                <h2>Report an Issue</h2>
+                <div class="report-content">
+                    <div class="report-section">
+                        <h3>Having Problems?</h3>
+                        <p>If you're experiencing issues with ImageConverter Pro, we're here to help. Please report any problems you encounter so we can fix them promptly.</p>
+                    </div>
+                    
+                    <div class="report-section">
+                        <h3>Common Issues</h3>
+                        <p>Before reporting an issue, check if it's one of these common problems:</p>
+                        <ul>
+                            <li><strong>Image not uploading:</strong> Make sure your image is under 5MB and in a supported format</li>
+                            <li><strong>Conversion failing:</strong> Try refreshing the page and converting again</li>
+                            <li><strong>Poor quality output:</strong> Adjust the quality slider to a higher value</li>
+                            <li><strong>Download not working:</strong> Check if your browser is blocking pop-ups</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="report-section">
+                        <h3>How to Report an Issue</h3>
+                        <p>When reporting an issue, please include the following information:</p>
+                        <ul>
+                            <li>Description of the problem</li>
+                            <li>Steps to reproduce the issue</li>
+                            <li>Your browser and version</li>
+                            <li>Any error messages you received</li>
+                            <li>Screenshots if possible</li>
+                        </ul>
+                        <p>You can report issues through our <a href="#" class="nav-link" data-target="contact">contact form</a>.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" id="backFromReport">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Individual Format Pages -->
+        <!-- JPG Format Page -->
+        <section id="jpg" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>JPG Format</h2>
+                        <p>Joint Photographic Experts Group</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About JPG</h3>
+                            <p>JPG (or JPEG) is a commonly used method of lossy compression for digital images. It's particularly suited for photographs and realistic images with smooth color transitions.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Excellent compression for photographic content</li>
+                                <li>Widely supported across all platforms</li>
+                                <li>Small file sizes</li>
+                                <li>Adjustable compression levels</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Lossy compression (quality loss)</li>
+                                <li>Not suitable for images with text or sharp edges</li>
+                                <li>Does not support transparency</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PNG Format Page -->
+        <section id="png" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>PNG Format</h2>
+                        <p>Portable Network Graphics</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About PNG</h3>
+                            <p>PNG is a raster graphics file format that supports lossless data compression. It was created as an improved, non-patented replacement for GIF.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Lossless compression (no quality loss)</li>
+                                <li>Supports transparency (alpha channel)</li>
+                                <li>Better compression than GIF for most images</li>
+                                <li>Wide browser and platform support</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Larger file sizes compared to JPG for photographs</li>
+                                <li>Does not support animation (unlike GIF)</li>
+                                <li>Not ideal for photographic content</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WebP Format Page -->
+        <section id="webp" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>WebP Format</h2>
+                        <p>Modern Web Image Format</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About WebP</h3>
+                            <p>WebP is a modern image format developed by Google that provides superior lossless and lossy compression for images on the web.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Superior compression compared to JPG and PNG</li>
+                                <li>Supports both lossy and lossless compression</li>
+                                <li>Supports transparency and animation</li>
+                                <li>Designed specifically for web use</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Limited browser support in older browsers</li>
+                                <li>Not as widely supported as JPG or PNG</li>
+                                <li>May require fallback formats for compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GIF Format Page -->
+        <section id="gif" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>GIF Format</h2>
+                        <p>Graphics Interchange Format</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About GIF</h3>
+                            <p>GIF is a bitmap image format that supports up to 8 bits per pixel, allowing a single image to reference a palette of up to 256 distinct colors.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Supports animation</li>
+                                <li>Wide browser and platform support</li>
+                                <li>Lossless compression for images with limited colors</li>
+                                <li>Supports transparency</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Limited to 256 colors</li>
+                                <li>Not suitable for photographic images</li>
+                                <li>Large file sizes for complex animations</li>
+                                <li>Limited color palette</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BMP Format Page -->
+        <section id="bmp" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>BMP Format</h2>
+                        <p>Bitmap Image File</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About BMP</h3>
+                            <p>BMP is a raster graphics image file format used to store bitmap digital images, independently of the display device.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Simple file structure</li>
+                                <li>No compression (preserves all image data)</li>
+                                <li>Widely supported on Windows platforms</li>
+                                <li>Good for storing raw image data</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Very large file sizes</li>
+                                <li>No compression (inefficient for web use)</li>
+                                <li>Limited features compared to modern formats</li>
+                                <li>Not suitable for web applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIFF Format Page -->
+        <section id="tiff" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>TIFF Format</h2>
+                        <p>Tagged Image File Format</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About TIFF</h3>
+                            <p>TIFF is a flexible, adaptable file format for storing images, including photographs and line art. It's widely used in publishing and photography.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Supports both lossy and lossless compression</li>
+                                <li>High quality preservation</li>
+                                <li>Widely used in professional photography</li>
+                                <li>Supports multiple pages and layers</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Large file sizes</li>
+                                <li>Limited web browser support</li>
+                                <li>Complex file structure</li>
+                                <li>Not suitable for web use</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ICO Format Page -->
+        <section id="ico" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>ICO Format</h2>
+                        <p>Icon File Format</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About ICO</h3>
+                            <p>ICO is an image file format for computer icons in Microsoft Windows. ICO files contain one or more small images at multiple sizes and color depths.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Specifically designed for icons</li>
+                                <li>Supports multiple image sizes in one file</li>
+                                <li>Widely supported on Windows</li>
+                                <li>Supports transparency</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Limited to small image sizes</li>
+                                <li>Primarily for Windows icons</li>
+                                <li>Not suitable for general image storage</li>
+                                <li>Limited color depth options</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVIF Format Page -->
+        <section id="avif" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>AVIF Format</h2>
+                        <p>AV1 Image File Format</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About AVIF</h3>
+                            <p>AVIF is an image file format that uses the AV1 video codec to compress images. It offers significant file size reduction while maintaining high quality.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Excellent compression efficiency</li>
+                                <li>High image quality at small file sizes</li>
+                                <li>Supports HDR and wide color gamut</li>
+                                <li>Modern, royalty-free format</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Limited browser support</li>
+                                <li>Slower encoding compared to other formats</li>
+                                <li>Newer format with evolving support</li>
+                                <li>May require fallback formats</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HEIC Format Page -->
+        <section id="heic" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>HEIC Format</h2>
+                        <p>High Efficiency Image Container</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About HEIC</h3>
+                            <p>HEIC is an image container format that uses HEVC (H.265) compression. It's the default image format on iOS devices and offers high compression efficiency.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>High compression efficiency</li>
+                                <li>Supports live photos and image sequences</li>
+                                <li>Maintains high image quality</li>
+                                <li>Small file sizes compared to JPG</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Limited support outside Apple ecosystem</li>
+                                <li>Proprietary format with licensing considerations</li>
+                                <li>Limited web browser support</li>
+                                <li>May require conversion for wider compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SVG Format Page -->
+        <section id="svg" class="page-section">
+            <div class="section">
+                <div class="format-details">
+                    <div class="format-header">
+                        <i class="fas fa-file-image format-icon"></i>
+                        <h2>SVG Format</h2>
+                        <p>Scalable Vector Graphics</p>
+                    </div>
+                    
+                    <div class="format-info">
+                        <div class="info-card">
+                            <h3><i class="fas fa-info-circle"></i> About SVG</h3>
+                            <p>SVG is an XML-based vector image format for two-dimensional graphics with support for interactivity and animation.</p>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-check-circle"></i> Advantages</h3>
+                            <ul>
+                                <li>Scalable without quality loss</li>
+                                <li>Small file sizes for simple graphics</li>
+                                <li>Supports animation and interactivity</li>
+                                <li>Editable with text editors</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card">
+                            <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
+                            <ul>
+                                <li>Not suitable for photographic images</li>
+                                <li>Complex SVGs can have large file sizes</li>
+                                <li>Rendering performance varies by complexity</li>
+                                <li>Limited support in very old browsers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Back Button -->
+    <button class="btn floating-back-btn" id="floatingBackBtn" style="display: none;">
+        <i class="fas fa-arrow-left"></i> Back to Formats
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ImageConverter Pro</h3>
+                    <p>Free online tool for all your image conversion needs. Fast, secure, and easy to use.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-target="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-target="how-it-works">How It Works</a></li>
+                        <li><a href="#" class="nav-link" data-target="supported-formats">Supported Formats</a></li>
+                        <li><a href="#" class="nav-link" data-target="feedback">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-target="faq">FAQ</a></li>
+                        <li><a href="#" class="nav-link" data-target="contact">Contact Us</a></li>
+                        <li><a href="#" class="nav-link" data-target="feedback">Feedback</a></li>
+                        <li><a href="#" class="nav-link" data-target="report-issue">Report Issue</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 ImageConverter Pro. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const outputFormat = document.getElementById('outputFormat');
+        const qualitySlider = document.getElementById('quality');
+        const qualityValue = document.getElementById('qualityValue');
+        const convertBtn = document.getElementById('convertBtn');
+        const previewArea = document.getElementById('previewArea');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageSections = document.querySelectorAll('.page-section');
+        const formatItems = document.querySelectorAll('.format-item');
+        const featureCards = document.querySelectorAll('.feature-card');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        const floatingBackBtn = document.getElementById('floatingBackBtn');
+        const backButtons = document.querySelectorAll('#backFromFastConversion, #backFromQualityControl, #backFromPrivacy, #backFromFeedback, #backFromReport');
+
+        // State variables
+        let originalImage = null;
+        let convertedImageUrl = null;
+        let originalFileName = '';
+        let scrollPosition = 0;
+
+        // Event Listeners
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--primary)';
+            uploadArea.style.backgroundColor = '#f0f4ff';
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#ccc';
+            uploadArea.style.backgroundColor = 'white';
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#ccc';
+            uploadArea.style.backgroundColor = 'white';
+            
+            if (e.dataTransfer.files.length) {
+                handleFileSelect(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        qualitySlider.addEventListener('input', () => {
+            qualityValue.textContent = `${qualitySlider.value}%`;
+        });
+
+        convertBtn.addEventListener('click', convertImage);
+        downloadBtn.addEventListener('click', downloadImage);
+        sendMessageBtn.addEventListener('click', sendMessage);
+        floatingBackBtn.addEventListener('click', goBackToFormats);
+
+        // Back button functionality
+        backButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Hide all sections
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show home section
+                document.getElementById('home').classList.add('active');
+                
+                // Update navigation state
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('active');
+                    if (navLink.getAttribute('data-target') === 'home') {
+                        navLink.classList.add('active');
+                    }
+                });
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // FAQ toggle functionality
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    answer.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+
+        // Navigation functionality
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('data-target');
+                
+                // Update active navigation state
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                link.classList.add('active');
+                
+                // Hide all sections
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                document.getElementById(target).classList.add('active');
+                
+                // Hide floating back button if not on format page
+                if (!isFormatPage(target)) {
+                    floatingBackBtn.style.display = 'none';
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Format item click functionality
+        formatItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const format = item.getAttribute('data-format');
+                
+                // Save scroll position
+                scrollPosition = window.scrollY;
+                
+                // Hide all sections
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show format section
+                document.getElementById(format).classList.add('active');
+                
+                // Show floating back button
+                floatingBackBtn.style.display = 'flex';
+                setTimeout(() => {
+                    floatingBackBtn.classList.add('visible');
+                }, 100);
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Feature card click functionality
+        featureCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const target = card.getAttribute('data-target');
+                
+                // Update active navigation state
+                navLinks.forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                
+                // Hide all sections
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                document.getElementById(target).classList.add('active');
+                
+                // Hide floating back button if not on format page
+                if (!isFormatPage(target)) {
+                    floatingBackBtn.style.display = 'none';
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Functions
+        function isFormatPage(target) {
+            const formatPages = ['jpg', 'png', 'webp', 'gif', 'bmp', 'tiff', 'ico', 'avif', 'heic', 'svg'];
+            return formatPages.includes(target);
+        }
+
+        function handleFileSelect(file) {
+            // Check if file is an image
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file.');
+                return;
+            }
+            
+            // Check file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size exceeds 5MB limit. Please choose a smaller image.');
+                return;
+            }
+            
+            // Display file info
+            uploadArea.innerHTML = `
+                <i class="fas fa-check-circle" style="color: var(--success)"></i>
+                <h3>${file.name}</h3>
+                <p>${(file.size / 1024).toFixed(2)} KB</p>
+            `;
+            
+            // Store file for conversion
+            originalImage = file;
+            originalFileName = file.name.split('.')[0];
+            
+            // Reset download button
+            downloadBtn.disabled = true;
+            convertedImageUrl = null;
+            
+            // Clear previous preview
+            previewArea.innerHTML = '<p>Your converted image will appear here</p>';
+        }
+
+        function convertImage() {
+            if (!originalImage) {
+                alert('Please select an image first.');
+                return;
+            }
+            
+            // Show loading state
+            convertBtn.innerHTML = '<div class="loading"></div> Converting...';
+            convertBtn.disabled = true;
+            
+            // Create a canvas element for conversion
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                // Set canvas dimensions to match image
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Draw image on canvas
+                ctx.drawImage(img, 0, 0);
+                
+                // Get the selected format
+                const format = outputFormat.value;
+                
+                // Convert based on format
+                let mimeType;
+                let quality = qualitySlider.value / 100;
+                
+                switch(format) {
+                    case 'jpg':
+                        mimeType = 'image/jpeg';
+                        break;
+                    case 'png':
+                        mimeType = 'image/png';
+                        quality = undefined; // PNG doesn't use quality parameter
+                        break;
+                    case 'webp':
+                        mimeType = 'image/webp';
+                        break;
+                    case 'gif':
+                        mimeType = 'image/gif';
+                        quality = undefined; // GIF doesn't use quality parameter
+                        break;
+                    case 'bmp':
+                        mimeType = 'image/bmp';
+                        quality = undefined; // BMP doesn't use quality parameter
+                        break;
+                    default:
+                        mimeType = 'image/png';
+                }
+                
+                // Convert to data URL
+                try {
+                    convertedImageUrl = canvas.toDataURL(mimeType, quality);
+                    
+                    // Display converted image
+                    const convertedImg = document.createElement('img');
+                    convertedImg.src = convertedImageUrl;
+                    convertedImg.alt = 'Converted image';
+                    
+                    previewArea.innerHTML = '';
+                    previewArea.appendChild(convertedImg);
+                    
+                    // Show conversion status
+                    const status = document.createElement('div');
+                    status.className = 'conversion-status success';
+                    status.innerHTML = `<i class="fas fa-check-circle"></i> Conversion successful!`;
+                    previewArea.appendChild(status);
+                    
+                    // Enable download button
+                    downloadBtn.disabled = false;
+                } catch (error) {
+                    // Show error status
+                    const status = document.createElement('div');
+                    status.className = 'conversion-status error';
+                    status.innerHTML = `<i class="fas fa-exclamation-circle"></i> Conversion failed: ${error.message}`;
+                    previewArea.innerHTML = '';
+                    previewArea.appendChild(status);
+                }
+                
+                // Reset convert button
+                convertBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Convert Image';
+                convertBtn.disabled = false;
+            };
+            
+            img.onerror = function() {
+                // Show error status
+                const status = document.createElement('div');
+                status.className = 'conversion-status error';
+                status.innerHTML = `<i class="fas fa-exclamation-circle"></i> Failed to load image`;
+                previewArea.innerHTML = '';
+                previewArea.appendChild(status);
+                
+                // Reset convert button
+                convertBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Convert Image';
+                convertBtn.disabled = false;
+            };
+            
+            // Start loading the image
+            img.src = URL.createObjectURL(originalImage);
+        }
+
+        function downloadImage() {
+            if (!convertedImageUrl) {
+                alert('No converted image available. Please convert an image first.');
+                return;
+            }
+            
+            // Create a download link
+            const a = document.createElement('a');
+            a.href = convertedImageUrl;
+            a.download = `${originalFileName}.${outputFormat.value}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function sendMessage() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            // Show loading state
+            sendMessageBtn.innerHTML = '<div class="loading"></div> Sending...';
+            sendMessageBtn.disabled = true;
+            
+            // Simulate sending message
+            setTimeout(() => {
+                alert('Thank you for your message! We will get back to you soon.');
+                
+                // Reset form
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+                
+                // Reset button
+                sendMessageBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                sendMessageBtn.disabled = false;
+            }, 1500);
+        }
+
+        function goBackToFormats() {
+            // Hide floating back button
+            floatingBackBtn.classList.remove('visible');
+            setTimeout(() => {
+                floatingBackBtn.style.display = 'none';
+            }, 300);
+            
+            // Hide all sections
+            pageSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show supported formats section
+            document.getElementById('supported-formats').classList.add('active');
+            
+            // Update navigation state
+            navLinks.forEach(navLink => {
+                navLink.classList.remove('active');
+                if (navLink.getAttribute('data-target') === 'supported-formats') {
+                    navLink.classList.add('active');
+                }
+            });
+            
+            // Restore scroll position
+            window.scrollTo(0, scrollPosition);
+        }
+
+        // Add some animation to the hero section
+        document.addEventListener('DOMContentLoaded', function() {
+            const hero = document.querySelector('.hero');
+            hero.classList.add('pulse');
+            
+            // Remove pulse animation after 5 seconds
+            setTimeout(() => {
+                hero.classList.remove('pulse');
+            }, 5000);
+        });
+
+        // Show/hide floating back button on scroll
+        window.addEventListener('scroll', function() {
+            if (floatingBackBtn.style.display !== 'none') {
+                if (window.scrollY > 300) {
+                    floatingBackBtn.classList.add('visible');
+                } else {
+                    floatingBackBtn.classList.remove('visible');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
