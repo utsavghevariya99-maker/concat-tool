@@ -11,11 +11,13 @@
         :root {
             --primary-color: #4a6ee0;
             --primary-dark: #3a5bc7;
+            --primary-light: #6d8aec;
             --secondary-color: #6c757d;
             --success-color: #28a745;
             --danger-color: #dc3545;
             --light-color: #f8f9fa;
             --dark-color: #343a40;
+            --nav-bg: linear-gradient(135deg, #4a6ee0 0%, #3a5bc7 100%);
             --border-radius: 8px;
             --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
@@ -43,7 +45,7 @@
         }
 
         header {
-            background-color: white;
+            background: var(--nav-bg);
             box-shadow: var(--box-shadow);
             position: sticky;
             top: 0;
@@ -66,7 +68,7 @@
 
         .logo-icon {
             font-size: 2rem;
-            color: var(--primary-color);
+            color: white;
             animation: pulse 2s infinite;
         }
 
@@ -83,13 +85,13 @@
 
         .logo h1 {
             font-size: 1.5rem;
-            color: var(--primary-color);
+            color: white;
             line-height: 1.2;
         }
 
         .logo span {
             font-size: 0.8rem;
-            color: var(--secondary-color);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         nav ul {
@@ -100,7 +102,7 @@
 
         nav a {
             text-decoration: none;
-            color: var(--dark-color);
+            color: white;
             font-weight: 500;
             transition: var(--transition);
             position: relative;
@@ -108,7 +110,8 @@
         }
 
         nav a.active {
-            color: var(--primary-color);
+            color: white;
+            font-weight: 600;
         }
 
         nav a.active:after {
@@ -118,8 +121,14 @@
             height: 3px;
             bottom: 0;
             left: 0;
-            background-color: var(--primary-color);
+            background-color: white;
             border-radius: 3px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         nav a:after {
@@ -129,7 +138,7 @@
             height: 3px;
             bottom: 0;
             left: 0;
-            background-color: var(--primary-color);
+            background-color: white;
             transition: var(--transition);
             border-radius: 3px;
         }
@@ -183,10 +192,44 @@
             border-radius: 3px;
         }
 
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+
         .hero-text {
-            margin-bottom: 25px;
             font-size: 1.1rem;
             color: var(--secondary-color);
+            max-width: 800px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+            animation: fadeIn 1s ease 0.3s both;
         }
 
         .upload-area {
@@ -509,12 +552,12 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--dark-color);
+            color: white;
             transition: var(--transition);
         }
 
         .mobile-menu-btn:hover {
-            color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         @media (max-width: 768px) {
@@ -758,10 +801,12 @@
             transform: scale(1.1);
         }
 
+        /* Enhanced Step Indicator */
         .step-indicator {
             display: flex;
             justify-content: center;
-            margin: 30px 0;
+            margin: 40px 0;
+            position: relative;
         }
 
         .step {
@@ -770,6 +815,7 @@
             align-items: center;
             position: relative;
             width: 120px;
+            z-index: 2;
         }
 
         .step:not(:last-child):after {
@@ -778,8 +824,20 @@
             top: 20px;
             left: 60px;
             width: 60px;
-            height: 2px;
+            height: 3px;
             background-color: #e9ecef;
+            z-index: 1;
+            transition: background-color 0.5s ease;
+        }
+
+        .step.active:not(:last-child):after {
+            background-color: var(--primary-color);
+            animation: lineProgress 1s ease forwards;
+        }
+
+        @keyframes lineProgress {
+            0% { width: 0; }
+            100% { width: 60px; }
         }
 
         .step-circle {
@@ -793,16 +851,32 @@
             margin-bottom: 10px;
             font-weight: bold;
             transition: var(--transition);
+            position: relative;
+            z-index: 2;
         }
 
         .step.active .step-circle {
             background-color: var(--primary-color);
             color: white;
+            animation: circlePulse 0.8s ease;
+            box-shadow: 0 0 0 10px rgba(74, 110, 224, 0.2);
+        }
+
+        @keyframes circlePulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74, 110, 224, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(74, 110, 224, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74, 110, 224, 0); }
         }
 
         .step-label {
             font-size: 0.9rem;
             text-align: center;
+            transition: var(--transition);
+        }
+
+        .step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 600;
         }
 
         .ad-between {
@@ -890,6 +964,517 @@
             margin-top: 20px;
             text-align: center;
         }
+
+        /* New styles for improved functionality */
+        .file-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .file-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .file-details {
+            text-align: left;
+        }
+
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .file-size {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .download-section {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .download-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .download-section.hidden {
+            display: none;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .download-btn.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .download-btn:nth-child(1) { transition-delay: 0.1s; }
+        .download-btn:nth-child(2) { transition-delay: 0.2s; }
+        .download-btn:nth-child(3) { transition-delay: 0.3s; }
+        .download-btn:nth-child(4) { transition-delay: 0.4s; }
+        .download-btn:nth-child(5) { transition-delay: 0.5s; }
+        .download-btn:nth-child(6) { transition-delay: 0.6s; }
+
+        .conversion-status {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+
+        .status-success {
+            color: var(--success-color);
+        }
+
+        .status-error {
+            color: var(--danger-color);
+        }
+
+        .success-animation {
+            animation: successPulse 2s infinite;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Updated loading animation - straight line */
+        .loading-line {
+            display: none;
+            width: 100%;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.3);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            overflow: hidden;
+        }
+
+        .loading-line-inner {
+            height: 100%;
+            width: 0%;
+            background-color: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            transition: width 0.3s ease;
+        }
+
+        .converting .btn-text {
+            opacity: 0.8;
+        }
+
+        .converting .loading-line {
+            display: block;
+        }
+
+        .page-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .page-number {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .download-all-btn {
+            background-color: var(--success-color);
+            animation: successPulse 2s infinite;
+        }
+
+        .download-all-btn:hover {
+            background-color: #218838;
+        }
+
+        .file-processing {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        /* Enhanced navigation styles */
+        .nav-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-highlight:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s;
+        }
+
+        .nav-highlight.active:before {
+            left: 100%;
+        }
+
+        /* Step by step animation */
+        .step-transition {
+            animation: slideFromRight 0.5s ease-out;
+        }
+
+        @keyframes slideFromRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .back-transition {
+            animation: slideFromLeft 0.5s ease-out;
+        }
+
+        @keyframes slideFromLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Enhanced contact page styles */
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .contact-method {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-method i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-method h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Enhanced FAQ styles */
+        .faq-categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .faq-category-btn {
+            padding: 8px 16px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .faq-category-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .faq-category-btn:hover:not(.active) {
+            background-color: #e9ecef;
+        }
+
+        .faq-category {
+            display: none;
+        }
+
+        .faq-category.active {
+            display: block;
+        }
+
+        /* Enhanced features page */
+        .features-intro {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .feature-comparison {
+            margin-top: 40px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .check-mark {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .cross-mark {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        /* Quality-based download options */
+        .quality-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .quality-option {
+            background-color: white;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .quality-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .quality-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 110, 224, 0.05);
+        }
+
+        .quality-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .quality-description {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .quality-size {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        /* Content sections styling */
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .content-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .content-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .content-section strong {
+            color: var(--primary-color);
+        }
+
+        .content-section .highlight {
+            background-color: rgba(74, 110, 224, 0.1);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+            margin: 15px 0;
+        }
+
+        /* Box-type information sections */
+        .info-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .info-box-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .info-box-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .info-box-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .info-box-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .info-box-content {
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        .info-box-content ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .info-box-content li {
+            margin-bottom: 8px;
+        }
+
+        /* How-to-use steps */
+        .how-to-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .step-box {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid #e9ecef;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .step-description {
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -910,11 +1495,11 @@
                 </button>
                 <nav id="mainNav">
                     <ul>
-                        <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
-                        <li><a href="#" class="nav-link" data-target="how-to-use">How to Use</a></li>
-                        <li><a href="#" class="nav-link" data-target="features">Features</a></li>
-                        <li><a href="#" class="nav-link" data-target="faq">FAQ</a></li>
-                        <li><a href="#" class="nav-link" data-target="contact">Contact</a></li>
+                        <li><a href="#" class="nav-link nav-highlight active" data-target="home">Home</a></li>
+                        <li><a href="#" class="nav-link nav-highlight" data-target="how-to-use">How to Use</a></li>
+                        <li><a href="#" class="nav-link nav-highlight" data-target="features">Features</a></li>
+                        <li><a href="#" class="nav-link nav-highlight" data-target="faq">FAQ</a></li>
+                        <li><a href="#" class="nav-link nav-highlight" data-target="contact">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -924,8 +1509,10 @@
     <div class="container">
         <!-- Home Section (Converter) -->
         <div id="home" class="page-section active">
-            <h2>Convert PDF to High-Quality Images</h2>
-            <p class="hero-text">Transform your PDF pages into JPG, PNG, or WebP images with our fast, secure, and easy-to-use online tool. No registration required - convert your files instantly!</p>
+            <div class="hero-section">
+                <h1 class="hero-title">Convert PDF to High-Quality Images</h1>
+                <p class="hero-text">Transform your PDF pages into JPG, PNG, or WebP images with our fast, secure, and easy-to-use online tool. No registration required - convert your files instantly!</p>
+            </div>
             
             <!-- Advertisement between definition and upload -->
             <div class="ad-between">
@@ -1021,7 +1608,7 @@
 
                     <div class="preview-section">
                         <h3 class="section-title">Preview</h3>
-                        <p>No PDF uploaded yet. Select a file to see preview.</p>
+                        <p id="previewMessage">No PDF uploaded yet. Select a file to see preview.</p>
                         <div class="preview-container" id="previewContainer">
                             <!-- Preview items will be added here dynamically -->
                         </div>
@@ -1043,8 +1630,28 @@
                         <div class="progress" id="progress"></div>
                     </div>
 
+                    <div class="conversion-status" id="conversionStatus"></div>
+
                     <div class="action-buttons">
-                        <button class="btn btn-full" id="convertBtn">Convert to Images</button>
+                        <button class="btn btn-full" id="convertBtn">
+                            <span class="btn-text">Convert</span>
+                            <div class="loading-line">
+                                <div class="loading-line-inner"></div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="download-section hidden" id="downloadSection">
+                        <h3 class="section-title">Your Images Are Ready!</h3>
+                        <p>Your PDF has been successfully converted to images. Choose your preferred quality option:</p>
+                        
+                        <div class="quality-options" id="qualityOptions">
+                            <!-- Quality options will be added here dynamically -->
+                        </div>
+                        
+                        <div class="download-buttons" id="downloadButtons">
+                            <!-- Download buttons will be added here dynamically -->
+                        </div>
                     </div>
                 </div>
 
@@ -1065,7 +1672,7 @@
                             <li>Upload your PDF file by dragging or browsing</li>
                             <li>Select your preferred output format and quality</li>
                             <li>Choose which pages to convert</li>
-                            <li>Click "Convert to Images" and download</li>
+                            <li>Click "Convert" and download</li>
                         </ul>
                     </div>
 
@@ -1091,48 +1698,94 @@
             <h2>How to Use PDFMagic</h2>
             <p>Follow these simple steps to convert your PDF files to high-quality images:</p>
             
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-upload"></i>
+            <div class="how-to-steps">
+                <div class="step-box">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
                     </div>
-                    <h3>Step 1: Upload PDF</h3>
-                    <p>Drag and drop your PDF file or click to browse and select from your device.</p>
+                    <h3 class="step-title">Upload Your PDF</h3>
+                    <p class="step-description">Drag and drop your PDF file or click to browse and select. We support files up to 100MB in size.</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
+                <div class="step-box">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
                         <i class="fas fa-cog"></i>
                     </div>
-                    <h3>Step 2: Configure Settings</h3>
-                    <p>Choose output format, quality, and select which pages to convert.</p>
+                    <h3 class="step-title">Configure Settings</h3>
+                    <p class="step-description">Choose your preferred output format, quality settings, and select which pages to convert.</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-sync"></i>
+                <div class="step-box">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-sync-alt"></i>
                     </div>
-                    <h3>Step 3: Convert</h3>
-                    <p>Click the convert button and wait for the process to complete.</p>
+                    <h3 class="step-title">Convert</h3>
+                    <p class="step-description">Click the convert button and watch as your PDF is transformed into high-quality images.</p>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
+                <div class="step-box">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
                         <i class="fas fa-download"></i>
                     </div>
-                    <h3>Step 4: Download</h3>
-                    <p>Download your converted images individually or as a ZIP archive.</p>
+                    <h3 class="step-title">Download</h3>
+                    <p class="step-description">Download individual images or all images as a convenient ZIP archive.</p>
                 </div>
             </div>
             
-            <h3 style="margin-top: 30px;">Tips for Best Results</h3>
-            <ul class="info-list">
-                <li>For documents with text, use PNG format for best clarity</li>
-                <li>For photographs within PDFs, JPG format provides better compression</li>
-                <li>WebP format offers the smallest file sizes with good quality</li>
-                <li>Higher quality settings result in larger file sizes</li>
-                <li>You can convert specific pages instead of the entire document</li>
-            </ul>
+            <div class="content-section">
+                <h3>Additional Tips</h3>
+                <div class="info-boxes">
+                    <div class="info-box-item">
+                        <div class="info-box-icon">
+                            <i class="fas fa-file-image"></i>
+                        </div>
+                        <h3 class="info-box-title">Format Selection</h3>
+                        <div class="info-box-content">
+                            <p>Choose the right format for your needs:</p>
+                            <ul>
+                                <li><strong>JPG:</strong> Best for photographs and web use</li>
+                                <li><strong>PNG:</strong> Ideal for documents with text and graphics</li>
+                                <li><strong>WebP:</strong> Modern format with superior compression</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box-item">
+                        <div class="info-box-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <h3 class="info-box-title">Quality Settings</h3>
+                        <div class="info-box-content">
+                            <p>Adjust quality based on your requirements:</p>
+                            <ul>
+                                <li><strong>High (90-100%):</strong> Best quality, larger file size</li>
+                                <li><strong>Medium (70-89%):</strong> Good balance for most uses</li>
+                                <li><strong>Low (1-69%):</strong> Smaller files, faster downloads</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box-item">
+                        <div class="info-box-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="info-box-title">Security & Privacy</h3>
+                        <div class="info-box-content">
+                            <p>Your files are completely secure:</p>
+                            <ul>
+                                <li>All processing happens in your browser</li>
+                                <li>Files never leave your computer</li>
+                                <li>No registration or personal information required</li>
+                                <li>Automatic deletion after conversion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Features Section -->
@@ -1140,312 +1793,97 @@
             <a href="#" class="back-btn" data-target="home">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
-            <h2>PDF to Image Converter Features</h2>
-            <p>PDFMagic offers a comprehensive set of features to meet all your PDF to image conversion needs.</p>
+            <h2>PDFMagic Features</h2>
+            <p>Discover the powerful features that make PDFMagic the best PDF to image converter online.</p>
             
-            <div class="feature-grid">
-                <div class="feature-card" data-target="fast-conversion">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
+            <div class="info-boxes">
+                <div class="info-box-item">
+                    <div class="info-box-icon">
+                        <i class="fas fa-tachometer-alt"></i>
                     </div>
-                    <h3>Fast Conversion</h3>
-                    <p>Convert PDFs to images in seconds with our optimized processing engine.</p>
+                    <h3 class="info-box-title">Fast Conversion</h3>
+                    <div class="info-box-content">
+                        <p>Convert your PDFs to images in seconds with our optimized conversion engine. No waiting in queues or delays.</p>
+                        <ul>
+                            <li>Multi-core processing support</li>
+                            <li>Batch conversion capabilities</li>
+                            <li>Optimized for large documents</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="feature-card" data-target="multiple-formats">
-                    <div class="feature-icon">
-                        <i class="fas fa-layer-group"></i>
+                <div class="info-box-item">
+                    <div class="info-box-icon">
+                        <i class="fas fa-images"></i>
                     </div>
-                    <h3>Multiple Formats</h3>
-                    <p>Support for JPG, PNG, and WebP formats to suit different needs.</p>
+                    <h3 class="info-box-title">Multiple Formats</h3>
+                    <div class="info-box-content">
+                        <p>Convert to the most popular image formats with full control over quality settings and optimization options.</p>
+                        <ul>
+                            <li>JPG with adjustable compression</li>
+                            <li>PNG with transparency support</li>
+                            <li>WebP with superior compression</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="feature-card" data-target="quality-control">
-                    <div class="feature-icon">
-                        <i class="fas fa-sliders-h"></i>
+                <div class="info-box-item">
+                    <div class="info-box-icon">
+                        <i class="fas fa-file-alt"></i>
                     </div>
-                    <h3>Quality Control</h3>
-                    <p>Adjustable quality settings to balance file size and image clarity.</p>
+                    <h3 class="info-box-title">Flexible Selection</h3>
+                    <div class="info-box-content">
+                        <p>Convert exactly what you need with our flexible page selection options and range support.</p>
+                        <ul>
+                            <li>Convert all pages or specific ranges</li>
+                            <li>Select individual pages</li>
+                            <li>Custom page numbering support</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="feature-card" data-target="secure-processing">
-                    <div class="feature-icon">
+                <div class="info-box-item">
+                    <div class="info-box-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Secure Processing</h3>
-                    <p>Your files are processed locally and never stored on our servers.</p>
-                </div>
-                
-                <div class="feature-card" data-target="mobile-friendly">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Mobile Friendly</h3>
-                    <p>Fully responsive design that works perfectly on all devices.</p>
-                </div>
-                
-                <div class="feature-card" data-target="no-installation">
-                    <div class="feature-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h3>No Installation</h3>
-                    <p>Works directly in your browser with no software to download.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Feature Detail Pages -->
-        <!-- Fast Conversion Feature -->
-        <div id="fast-conversion" class="page-section">
-            <a href="#" class="back-btn" data-target="features">
-                <i class="fas fa-arrow-left"></i> Back to Features
-            </a>
-            <div class="feature-detail">
-                <div class="feature-header">
-                    <div class="feature-header-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <div>
-                        <h2>Fast Conversion</h2>
-                        <p>Experience lightning-fast PDF to image conversion with our optimized processing engine.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-content">
-                    <div class="benefits-list">
-                        <h3>Key Benefits</h3>
+                    <h3 class="info-box-title">Complete Privacy</h3>
+                    <div class="info-box-content">
+                        <p>Your documents never leave your computer. All processing happens locally in your browser for maximum security.</p>
                         <ul>
-                            <li>Convert multi-page PDFs in seconds, not minutes</li>
-                            <li>Optimized algorithms for maximum performance</li>
-                            <li>Parallel processing for handling multiple pages simultaneously</li>
-                            <li>Minimal resource usage for smooth operation</li>
-                            <li>No waiting in queues - instant processing</li>
+                            <li>No server uploads required</li>
+                            <li>Automatic file deletion</li>
+                            <li>No registration or tracking</li>
                         </ul>
                     </div>
-                    
-                    <div class="how-it-works">
-                        <h3>How It Works</h3>
-                        <ol>
-                            <li>Advanced PDF parsing engine extracts page data</li>
-                            <li>Multi-threaded rendering converts pages to images</li>
-                            <li>Smart caching reduces processing time for repeated conversions</li>
-                            <li>Optimized output encoding for fast file generation</li>
-                            <li>Direct browser download without server delays</li>
-                        </ol>
-                    </div>
                 </div>
                 
-                <div class="try-now-btn">
-                    <button class="btn" id="tryFastConversion">Try Fast Conversion Now</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Multiple Formats Feature -->
-        <div id="multiple-formats" class="page-section">
-            <a href="#" class="back-btn" data-target="features">
-                <i class="fas fa-arrow-left"></i> Back to Features
-            </a>
-            <div class="feature-detail">
-                <div class="feature-header">
-                    <div class="feature-header-icon">
-                        <i class="fas fa-layer-group"></i>
+                <div class="info-box-item">
+                    <div class="info-box-icon">
+                        <i class="fas fa-magic"></i>
                     </div>
-                    <div>
-                        <h2>Multiple Formats</h2>
-                        <p>Choose from JPG, PNG, and WebP formats to suit your specific needs.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-content">
-                    <div class="benefits-list">
-                        <h3>Format Options</h3>
+                    <h3 class="info-box-title">Smart Optimization</h3>
+                    <div class="info-box-content">
+                        <p>Advanced optimization features ensure the best results for your specific use case and requirements.</p>
                         <ul>
-                            <li><strong>JPG</strong>: Perfect for photographs with excellent compression</li>
-                            <li><strong>PNG</strong>: Ideal for documents with text and transparency</li>
-                            <li><strong>WebP</strong>: Modern format with superior compression</li>
-                            <li>Batch conversion to multiple formats simultaneously</li>
-                            <li>Automatic format selection based on content type</li>
+                            <li>Web optimization for faster loading</li>
+                            <li>Color profile preservation</li>
+                            <li>Metadata handling options</li>
                         </ul>
                     </div>
-                    
-                    <div class="how-it-works">
-                        <h3>When to Use Each Format</h3>
-                        <ol>
-                            <li>Use JPG for photos, screenshots with many colors</li>
-                            <li>Use PNG for documents, text, logos with transparency</li>
-                            <li>Use WebP for web content with smaller file sizes</li>
-                            <li>Quality settings available for each format</li>
-                            <li>Preview available before final conversion</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quality Control Feature -->
-        <div id="quality-control" class="page-section">
-            <a href="#" class="back-btn" data-target="features">
-                <i class="fas fa-arrow-left"></i> Back to Features
-            </a>
-            <div class="feature-detail">
-                <div class="feature-header">
-                    <div class="feature-header-icon">
-                        <i class="fas fa-sliders-h"></i>
-                    </div>
-                    <div>
-                        <h2>Quality Control</h2>
-                        <p>Fine-tune your image quality with precise control over output settings.</p>
-                    </div>
                 </div>
                 
-                <div class="feature-content">
-                    <div class="benefits-list">
-                        <h3>Quality Options</h3>
+                <div class="info-box-item">
+                    <div class="info-box-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3 class="info-box-title">Cross-Platform</h3>
+                    <div class="info-box-content">
+                        <p>Works seamlessly on all devices and browsers without any installation or setup required.</p>
                         <ul>
-                            <li>Adjustable quality slider from 1% to 100%</li>
-                            <li>Real-time file size estimation</li>
-                            <li>Preset quality profiles (Low, Medium, High, Maximum)</li>
-                            <li>Format-specific optimization algorithms</li>
-                            <li>Visual quality preview before conversion</li>
+                            <li>Works on Windows, Mac, Linux</li>
+                            <li>Compatible with all modern browsers</li>
+                            <li>Mobile-friendly interface</li>
                         </ul>
-                    </div>
-                    
-                    <div class="how-it-works">
-                        <h3>Optimization Features</h3>
-                        <ol>
-                            <li>Smart compression maintains visual quality</li>
-                            <li>Adaptive resolution based on content type</li>
-                            <li>Color profile preservation for accurate reproduction</li>
-                            <li>Metadata optimization for smaller file sizes</li>
-                            <li>Progressive rendering for web-optimized images</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Secure Processing Feature -->
-        <div id="secure-processing" class="page-section">
-            <a href="#" class="back-btn" data-target="features">
-                <i class="fas fa-arrow-left"></i> Back to Features
-            </a>
-            <div class="feature-detail">
-                <div class="feature-header">
-                    <div class="feature-header-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div>
-                        <h2>Secure Processing</h2>
-                        <p>Your documents remain completely private with our local processing technology.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-content">
-                    <div class="benefits-list">
-                        <h3>Security Features</h3>
-                        <ul>
-                            <li>100% local processing - no file uploads</li>
-                            <li>No document storage on our servers</li>
-                            <li>Automatic file deletion after conversion</li>
-                            <li>SSL encryption for all page loads</li>
-                            <li>No tracking of your conversion activities</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="how-it-works">
-                        <h3>Privacy Assurance</h3>
-                        <ol>
-                            <li>Files processed entirely within your browser</li>
-                            <li>No network transmission of your documents</li>
-                            <li>Memory cleared immediately after conversion</li>
-                            <li>No registration or personal information required</li>
-                            <li>Open-source processing libraries for transparency</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Friendly Feature -->
-        <div id="mobile-friendly" class="page-section">
-            <a href="#" class="back-btn" data-target="features">
-                <i class="fas fa-arrow-left"></i> Back to Features
-            </a>
-            <div class="feature-detail">
-                <div class="feature-header">
-                    <div class="feature-header-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div>
-                        <h2>Mobile Friendly</h2>
-                        <p>Convert PDFs to images on any device with our fully responsive design.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-content">
-                    <div class="benefits-list">
-                        <h3>Mobile Features</h3>
-                        <ul>
-                            <li>Touch-optimized interface for mobile devices</li>
-                            <li>Responsive design adapts to any screen size</li>
-                            <li>Fast loading on mobile networks</li>
-                            <li>Mobile-optimized file handling</li>
-                            <li>Easy sharing to mobile apps after conversion</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="how-it-works">
-                        <h3>Mobile Experience</h3>
-                        <ol>
-                            <li>Streamlined interface for small screens</li>
-                            <li>Touch-friendly controls and buttons</li>
-                            <li>Optimized for both portrait and landscape modes</li>
-                            <li>Progressive Web App capabilities</li>
-                            <li>Offline functionality for repeated use</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- No Installation Feature -->
-        <div id="no-installation" class="page-section">
-            <a href="#" class="back-btn" data-target="features">
-                <i class="fas fa-arrow-left"></i> Back to Features
-            </a>
-            <div class="feature-detail">
-                <div class="feature-header">
-                    <div class="feature-header-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <div>
-                        <h2>No Installation</h2>
-                        <p>Start converting immediately without downloading any software or plugins.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-content">
-                    <div class="benefits-list">
-                        <h3>Instant Access</h3>
-                        <ul>
-                            <li>Works directly in your web browser</li>
-                            <li>No software downloads or installations</li>
-                            <li>No browser plugins or extensions required</li>
-                            <li>Access from any computer with internet</li>
-                            <li>Always up-to-date with the latest features</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="how-it-works">
-                        <h3>Browser Technology</h3>
-                        <ol>
-                            <li>Uses modern HTML5 and JavaScript APIs</li>
-                            <li>Compatible with all major browsers</li>
-                            <li>Client-side processing for instant results</li>
-                            <li>No server dependencies for conversion</li>
-                            <li>Works offline after initial page load</li>
-                        </ol>
                     </div>
                 </div>
             </div>
@@ -1457,71 +1895,140 @@
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
             <h2>Frequently Asked Questions</h2>
-            <p>Find answers to common questions about PDFMagic PDF to Image Converter.</p>
+            <p>Find answers to common questions about PDFMagic and PDF to image conversion.</p>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Is PDFMagic free to use?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div class="faq-categories">
+                <button class="faq-category-btn active" data-category="general">General</button>
+                <button class="faq-category-btn" data-category="conversion">Conversion</button>
+                <button class="faq-category-btn" data-category="technical">Technical</button>
+                <button class="faq-category-btn" data-category="privacy">Privacy & Security</button>
+            </div>
+            
+            <div id="general-faq" class="faq-category active">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is PDFMagic?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        PDFMagic is a free online tool that converts PDF documents to high-quality images in various formats including JPG, PNG, and WebP. It's designed to be fast, secure, and easy to use without requiring any registration.
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>Yes, PDFMagic is completely free to use. You can convert PDFs to images without any limitations or watermarks.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is PDFMagic free to use?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, PDFMagic is completely free to use. There are no hidden fees, subscriptions, or usage limits. You can convert as many PDFs as you need without any cost.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What file formats does PDFMagic support?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        PDFMagic supports converting PDF files to JPG, PNG, and WebP image formats. Each format has its own advantages: JPG for photographs, PNG for documents with text, and WebP for modern web use with better compression.
+                    </div>
                 </div>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Are my files secure?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div id="conversion-faq" class="faq-category">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does conversion take?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Conversion time depends on the size of your PDF and the number of pages. Most standard documents convert in under 30 seconds. Larger files with many pages may take a few minutes.
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>Absolutely. Your PDF files are processed locally in your browser and never uploaded to any server. This ensures complete privacy and security for your documents.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I convert specific pages instead of the whole document?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, you can select specific pages or page ranges to convert. Use the "Pages to Convert" option to choose between all pages, specific ranges (like 1-5, 7, 9-12), or selected individual pages.
+                    </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>What is the maximum file size I can convert?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>You can convert PDF files up to 50MB in size. For larger files, we recommend splitting them into smaller documents before conversion.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Which image format should I choose?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>It depends on your needs:
-                    <ul>
-                        <li><strong>JPG</strong>: Best for photographs and complex images with many colors</li>
-                        <li><strong>PNG</strong>: Ideal for documents with text, line art, or images with transparency</li>
-                        <li><strong>WebP</strong>: Provides excellent compression with good quality, perfect for web use</li>
-                    </ul>
-                    </p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What's the maximum file size I can convert?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        PDFMagic can handle PDF files up to 100MB in size. If your file is larger, we recommend splitting it into smaller parts or using compression tools before conversion.
+                    </div>
                 </div>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Can I convert password-protected PDFs?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div id="technical-faq" class="faq-category">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What image quality settings should I use?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        For documents with text, use PNG format with high quality settings. For photographs, JPG at 85-90% quality provides the best balance. WebP offers excellent compression while maintaining quality for web use.
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>Currently, PDFMagic does not support password-protected PDFs. You'll need to remove the password before converting.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Does PDFMagic preserve text quality?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, PDFMagic uses advanced rendering techniques to preserve text clarity and sharpness. For best results with text documents, we recommend using PNG format with high quality settings.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What browsers are supported?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        PDFMagic works with all modern browsers including Chrome, Firefox, Safari, Edge, and Opera. For the best experience, we recommend using the latest version of your browser.
+                    </div>
                 </div>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>How do I download my converted images?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div id="privacy-faq" class="faq-category">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my data secure with PDFMagic?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. PDFMagic processes your files entirely in your browser. Your PDFs never leave your computer and are not stored on our servers. Once you close the page, all data is automatically deleted.
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>After conversion, you can download each image individually or download all images as a ZIP archive for convenience.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you store my converted files?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        No, we do not store any of your files. The conversion happens locally in your browser, and once you download your images, all temporary data is cleared. Your privacy is our top priority.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I use PDFMagic for sensitive documents?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, because all processing happens locally in your browser, your sensitive documents never leave your computer. This makes PDFMagic safe for confidential business documents, personal files, and any other sensitive materials.
+                    </div>
                 </div>
             </div>
         </div>
@@ -1532,183 +2039,211 @@
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
             <h2>Contact Us</h2>
-            <p>Have questions, feedback, or need support? We're here to help! Reach out to us through any of the following methods.</p>
+            <p>We'd love to hear from you! Get in touch with our team for any questions, feedback, or support needs.</p>
             
-            <div class="contact-info">
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Email Us</h3>
+            <div class="contact-details">
+                <div class="contact-method">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Support</h3>
                     <p>support@pdfmagic.com</p>
                     <p>We typically respond within 24 hours</p>
                 </div>
                 
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <h3>Call Us</h3>
-                    <p>+1 (555) 123-4567</p>
-                    <p>Mon-Fri, 9am-5pm EST</p>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Visit Us</h3>
-                    <p>123 Tech Street</p>
-                    <p>Digital City, DC 12345</p>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
+                <div class="contact-method">
+                    <i class="fas fa-comments"></i>
                     <h3>Live Chat</h3>
-                    <p>Available 24/7</p>
-                    <p>Get instant help from our team</p>
+                    <p>Available Monday-Friday</p>
+                    <p>9:00 AM - 6:00 PM EST</p>
+                </div>
+                
+                <div class="contact-method">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Documentation</h3>
+                    <p>Comprehensive guides</p>
+                    <p>Tutorials & best practices</p>
                 </div>
             </div>
             
-            <h3 style="margin-top: 40px;">Send us a Message</h3>
-            <div class="contact-form">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" class="form-control" placeholder="Enter your name">
-                </div>
+            <div class="content-section">
+                <h3>Send Us a Message</h3>
+                <p>Fill out the form below and we'll get back to you as soon as possible.</p>
                 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" class="form-control" placeholder="Enter subject">
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" class="form-control" placeholder="Enter your message"></textarea>
-                </div>
-                
-                <button class="btn btn-full">Send Message</button>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" class="form-control" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="bug">Report a Bug</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" class="form-control" placeholder="Tell us how we can help you..." rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-full">Send Message</button>
+                </form>
+            </div>
+            
+            <div class="content-section">
+                <h3>Frequently Asked Questions</h3>
+                <p>Before contacting us, you might find answers to common questions in our <a href="#" class="nav-link" data-target="faq">FAQ section</a>. We've compiled detailed answers to the most common questions about PDF conversion, file formats, and troubleshooting.</p>
+            </div>
+            
+            <div class="content-section">
+                <h3>Feedback & Suggestions</h3>
+                <p>We're constantly working to improve PDFMagic. If you have suggestions for new features, improvements, or encounter any issues, please don't hesitate to reach out. Your feedback helps us make PDFMagic better for everyone.</p>
             </div>
         </div>
 
-        <!-- Privacy Policy Section -->
+        <!-- Legal Pages -->
         <div id="privacy-policy" class="page-section">
             <a href="#" class="back-btn" data-target="home">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
             <h2>Privacy Policy</h2>
-            <p>Last updated: January 1, 2023</p>
             
             <div class="legal-content">
-                <h3>1. Information We Collect</h3>
-                <p>PDFMagic is committed to protecting your privacy. We do not collect, store, or share any personal information when you use our PDF to image conversion service.</p>
+                <div class="content-section">
+                    <h3>Introduction</h3>
+                    <p>At PDFMagic, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our PDF to image conversion service.</p>
+                </div>
                 
-                <h3>2. File Processing</h3>
-                <p>All PDF files you upload for conversion are processed entirely within your browser. Your files never leave your device and are not transmitted to our servers or any third-party services.</p>
+                <div class="content-section">
+                    <h3>Information We Collect</h3>
+                    <p>PDFMagic is designed with privacy in mind. We collect minimal information to provide our services:</p>
+                    <ul>
+                        <li><strong>Usage Data:</strong> We may collect information about how you interact with our website, including pages visited and features used.</li>
+                        <li><strong>Technical Information:</strong> Browser type, operating system, and device information may be collected for analytics purposes.</li>
+                        <li><strong>No File Storage:</strong> Your PDF files and converted images are processed locally in your browser and never stored on our servers.</li>
+                    </ul>
+                </div>
                 
-                <h3>3. Cookies and Tracking</h3>
-                <p>We use minimal cookies to enhance your user experience. These include:</p>
-                <ul>
-                    <li>Session cookies to maintain your preferences during your visit</li>
-                    <li>Analytics cookies to understand how users interact with our website</li>
-                </ul>
+                <div class="content-section">
+                    <h3>How We Use Your Information</h3>
+                    <p>We use the information we collect to:</p>
+                    <ul>
+                        <li>Provide, maintain, and improve our services</li>
+                        <li>Understand how users interact with our website</li>
+                        <li>Develop new features and functionality</li>
+                        <li>Ensure the security and integrity of our service</li>
+                    </ul>
+                </div>
                 
-                <h3>4. Third-Party Services</h3>
-                <p>We use Google AdSense to display advertisements on our website. These third-party vendors may use cookies to serve ads based on your prior visits to our website or other websites.</p>
+                <div class="content-section">
+                    <h3>Data Security</h3>
+                    <p>We implement appropriate technical and organizational security measures to protect your information. Since all file processing happens locally in your browser, your documents never leave your computer, providing an additional layer of security.</p>
+                </div>
                 
-                <h3>5. Data Security</h3>
-                <p>Since all file processing happens locally in your browser, your documents remain completely secure and private. We do not have access to your files at any point.</p>
+                <div class="content-section">
+                    <h3>Third-Party Services</h3>
+                    <p>We may use third-party services for analytics and advertising. These services have their own privacy policies governing their use of information.</p>
+                </div>
                 
-                <h3>6. Changes to This Policy</h3>
-                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.</p>
+                <div class="content-section">
+                    <h3>Changes to This Policy</h3>
+                    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                </div>
                 
-                <h3>7. Contact Us</h3>
-                <p>If you have any questions about this Privacy Policy, please contact us at privacy@pdfmagic.com.</p>
+                <div class="content-section">
+                    <h3>Contact Us</h3>
+                    <p>If you have any questions about this Privacy Policy, please contact us at privacy@pdfmagic.com.</p>
+                </div>
             </div>
         </div>
 
-        <!-- Terms of Service Section -->
         <div id="terms-of-service" class="page-section">
             <a href="#" class="back-btn" data-target="home">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
             <h2>Terms of Service</h2>
-            <p>Last updated: January 1, 2023</p>
             
             <div class="legal-content">
-                <h3>1. Acceptance of Terms</h3>
-                <p>By accessing and using PDFMagic, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                <div class="content-section">
+                    <h3>Acceptance of Terms</h3>
+                    <p>By accessing and using PDFMagic, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                </div>
                 
-                <h3>2. Use License</h3>
-                <p>Permission is granted to temporarily use PDFMagic for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.</p>
+                <div class="content-section">
+                    <h3>Description of Service</h3>
+                    <p>PDFMagic provides an online PDF to image conversion service. The service is provided "as is" and "as available" without any warranty or representation of any kind.</p>
+                </div>
                 
-                <h3>3. Disclaimer</h3>
-                <p>The materials on PDFMagic are provided on an 'as is' basis. PDFMagic makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+                <div class="content-section">
+                    <h3>User Responsibilities</h3>
+                    <p>You agree not to use the service:</p>
+                    <ul>
+                        <li>For any unlawful purpose or to violate any laws</li>
+                        <li>To upload or convert copyrighted material without permission</li>
+                        <li>To upload malicious files or content</li>
+                        <li>To attempt to disrupt or compromise the service</li>
+                    </ul>
+                </div>
                 
-                <h3>4. Limitations</h3>
-                <p>In no event shall PDFMagic or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on PDFMagic.</p>
+                <div class="content-section">
+                    <h3>Intellectual Property</h3>
+                    <p>You retain all rights to the PDF files you upload and the images you convert. PDFMagic does not claim any ownership rights to your content.</p>
+                </div>
                 
-                <h3>5. Accuracy of Materials</h3>
-                <p>The materials appearing on PDFMagic could include technical, typographical, or photographic errors. PDFMagic does not warrant that any of the materials on its website are accurate, complete or current.</p>
+                <div class="content-section">
+                    <h3>Limitation of Liability</h3>
+                    <p>PDFMagic shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use the service.</p>
+                </div>
                 
-                <h3>6. Links</h3>
-                <p>PDFMagic has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by PDFMagic of the site.</p>
-                
-                <h3>7. Modifications</h3>
-                <p>PDFMagic may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.</p>
-                
-                <h3>8. Governing Law</h3>
-                <p>These terms and conditions are governed by and construed in accordance with the laws of the United States and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+                <div class="content-section">
+                    <h3>Service Modifications</h3>
+                    <p>PDFMagic reserves the right to modify or discontinue, temporarily or permanently, the service with or without notice at any time.</p>
+                </div>
             </div>
         </div>
 
-        <!-- Cookie Policy Section -->
         <div id="cookie-policy" class="page-section">
             <a href="#" class="back-btn" data-target="home">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
             <h2>Cookie Policy</h2>
-            <p>Last updated: January 1, 2023</p>
             
             <div class="legal-content">
-                <h3>1. What Are Cookies</h3>
-                <p>Cookies are small text files that are placed on your computer by websites that you visit. They are widely used in order to make websites work, or work more efficiently, as well as to provide information to the owners of the site.</p>
+                <div class="content-section">
+                    <h3>What Are Cookies</h3>
+                    <p>Cookies are small text files that are stored on your device when you visit websites. They help websites remember information about your visit, which can make your next visit easier and the site more useful to you.</p>
+                </div>
                 
-                <h3>2. How We Use Cookies</h3>
-                <p>PDFMagic uses cookies to improve your browsing experience and analyze our website traffic. Specifically, we use cookies for:</p>
-                <ul>
-                    <li>Remembering your preferences for image format and quality settings</li>
-                    <li>Analyzing how users interact with our website to improve our service</li>
-                    <li>Displaying relevant advertisements through Google AdSense</li>
-                </ul>
+                <div class="content-section">
+                    <h3>How We Use Cookies</h3>
+                    <p>PDFMagic uses cookies for the following purposes:</p>
+                    <ul>
+                        <li><strong>Essential Cookies:</strong> Required for the basic functionality of our service</li>
+                        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website</li>
+                        <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+                        <li><strong>Advertising Cookies:</strong> Used to deliver relevant advertisements</li>
+                    </ul>
+                </div>
                 
-                <h3>3. Types of Cookies We Use</h3>
-                <p>We use the following types of cookies on our website:</p>
-                <ul>
-                    <li><strong>Essential Cookies</strong>: These are necessary for the website to function properly</li>
-                    <li><strong>Preference Cookies</strong>: These remember your choices and settings</li>
-                    <li><strong>Analytics Cookies</strong>: These help us understand how visitors interact with our website</li>
-                    <li><strong>Advertising Cookies</strong>: These are used to deliver relevant ads and track ad performance</li>
-                </ul>
+                <div class="content-section">
+                    <h3>Managing Cookies</h3>
+                    <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed.</p>
+                </div>
                 
-                <h3>4. Third-Party Cookies</h3>
-                <p>We use Google AdSense to serve advertisements on our website. Google uses cookies to serve ads based on a user's prior visits to our website or other websites.</p>
-                
-                <h3>5. Managing Cookies</h3>
-                <p>You can control and/or delete cookies as you wish. You can delete all cookies that are already on your computer and you can set most browsers to prevent them from being placed. However, if you do this, you may have to manually adjust some preferences every time you visit a site and some services and functionalities may not work.</p>
-                
-                <h3>6. Changes to This Policy</h3>
-                <p>We may update our Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page.</p>
-                
-                <h3>7. Contact Us</h3>
-                <p>If you have any questions about our use of cookies, please contact us at privacy@pdfmagic.com.</p>
+                <div class="content-section">
+                    <h3>Third-Party Cookies</h3>
+                    <p>We may use third-party services that set their own cookies. These services help us analyze website traffic and deliver targeted advertisements.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1741,8 +2276,8 @@
         </div>
     </footer>
 
-    <div class="floating-btn" id="floatingBtn" title="Back to Top">
-        <i class="fas fa-arrow-up"></i>
+    <div class="floating-btn" id="floatingBtn" title="Back to Home">
+        <i class="fas fa-home"></i>
     </div>
 
     <script>
@@ -1756,9 +2291,15 @@
         const pageRangeGroup = document.getElementById('pageRangeGroup');
         const pageRangeInput = document.getElementById('pageRangeInput');
         const previewContainer = document.getElementById('previewContainer');
+        const previewMessage = document.getElementById('previewMessage');
         const progressBar = document.getElementById('progressBar');
         const progress = document.getElementById('progress');
         const convertBtn = document.getElementById('convertBtn');
+        const loadingLineInner = document.querySelector('.loading-line-inner');
+        const conversionStatus = document.getElementById('conversionStatus');
+        const downloadSection = document.getElementById('downloadSection');
+        const qualityOptions = document.getElementById('qualityOptions');
+        const downloadButtons = document.getElementById('downloadButtons');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
         const homeLink = document.getElementById('homeLink');
@@ -1767,24 +2308,28 @@
         const floatingBtn = document.getElementById('floatingBtn');
         const backBtns = document.querySelectorAll('.back-btn');
         const steps = document.querySelectorAll('.step');
-        const featureCards = document.querySelectorAll('.feature-card[data-target]');
-        const tryFastConversionBtn = document.getElementById('tryFastConversion');
+        const faqCategoryBtns = document.querySelectorAll('.faq-category-btn');
+        const faqCategories = document.querySelectorAll('.faq-category');
+
+        // State variables
+        let currentFile = null;
+        let convertedImages = [];
+        let currentPage = 'home';
+        let pageHistory = ['home'];
+        let isConverting = false;
 
         // Event Listeners
         uploadArea.addEventListener('click', () => fileInput.click());
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = 'var(--primary-color)';
-            uploadArea.style.backgroundColor = 'rgba(74, 110, 224, 0.1)';
+            uploadArea.classList.add('highlight');
         });
         uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = '#ced4da';
-            uploadArea.style.backgroundColor = 'transparent';
+            uploadArea.classList.remove('highlight');
         });
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = '#ced4da';
-            uploadArea.style.backgroundColor = 'transparent';
+            uploadArea.classList.remove('highlight');
             
             if (e.dataTransfer.files.length > 0) {
                 const file = e.dataTransfer.files[0];
@@ -1819,14 +2364,14 @@
         // Navigation
         homeLink.addEventListener('click', (e) => {
             e.preventDefault();
-            showSection('home');
+            showSection('home', true);
         });
 
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = link.getAttribute('data-target');
-                showSection(target);
+                showSection(target, true);
                 
                 // Close mobile menu if open
                 if (window.innerWidth <= 768) {
@@ -1839,40 +2384,27 @@
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = btn.getAttribute('data-target');
-                showSection(target);
+                showSection(target, false);
             });
         });
 
-        // Feature card clicks
-        featureCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = card.getAttribute('data-target');
-                showSection(target);
-            });
-        });
-
-        // Try Fast Conversion button
-        tryFastConversionBtn.addEventListener('click', () => {
-            // Navigate to home page
-            showSection('home');
-            
-            // Wait for page transition then scroll to upload area
-            setTimeout(() => {
-                // Highlight the upload area
-                uploadArea.classList.add('highlight');
+        // FAQ category buttons
+        faqCategoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
                 
-                // Scroll to upload area
-                uploadArea.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center'
+                // Update active button
+                faqCategoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show corresponding FAQ category
+                faqCategories.forEach(cat => {
+                    cat.classList.remove('active');
+                    if (cat.id === `${category}-faq`) {
+                        cat.classList.add('active');
+                    }
                 });
-                
-                // Remove highlight after animation
-                setTimeout(() => {
-                    uploadArea.classList.remove('highlight');
-                }, 3000);
-            }, 500);
+            });
         });
 
         mobileMenuBtn.addEventListener('click', () => {
@@ -1881,7 +2413,13 @@
 
         // Floating button
         floatingBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (currentPage !== 'home') {
+                // Go back to home
+                showSection('home', false);
+            } else {
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         });
 
         // FAQ Accordion
@@ -1905,14 +2443,20 @@
 
         // Functions
         function handleFileSelection(file) {
-            // In a real implementation, you would process the PDF here
-            // For this demo, we'll simulate the process
+            currentFile = file;
             
             // Update UI to show file is selected
             uploadArea.innerHTML = `
-                <div class="upload-icon">✅</div>
-                <p class="upload-text">${file.name}</p>
-                <button class="btn btn-secondary">Change File</button>
+                <div class="file-info">
+                    <div class="file-icon">
+                        <i class="fas fa-file-pdf success-animation"></i>
+                    </div>
+                    <div class="file-details">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${formatFileSize(file.size)}</div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" style="margin-top: 15px;">Change File</button>
             `;
             
             // Add event listener to the new button
@@ -1923,6 +2467,22 @@
             
             // Generate preview items (simulated)
             generatePreviewItems(5); // Assuming 5 pages for demo
+            
+            // Update preview message
+            previewMessage.textContent = "PDF preview (simulated)";
+            
+            // Reset conversion status and download section
+            conversionStatus.textContent = "";
+            conversionStatus.className = "conversion-status";
+            downloadSection.classList.add('hidden');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
 
         function generatePreviewItems(pageCount) {
@@ -1932,7 +2492,12 @@
                 const previewItem = document.createElement('div');
                 previewItem.className = 'preview-item';
                 previewItem.innerHTML = `
-                    <div class="preview-image">Page ${i}</div>
+                    <div class="preview-image">
+                        <div class="page-preview">
+                            <i class="fas fa-file-image" style="font-size: 2rem; color: var(--secondary-color);"></i>
+                            <div class="page-number">Page ${i}</div>
+                        </div>
+                    </div>
                     <div class="preview-info">Page ${i}</div>
                 `;
                 previewContainer.appendChild(previewItem);
@@ -1940,17 +2505,36 @@
         }
 
         function startConversion() {
+            if (!currentFile) {
+                alert('Please select a PDF file first.');
+                return;
+            }
+            
+            if (isConverting) return;
+            
+            isConverting = true;
+            
+            // Show loading state
+            convertBtn.classList.add('converting');
+            convertBtn.disabled = true;
+            
             // Show progress bar
             progressBar.classList.remove('hidden');
             
             // Update step indicator
             updateStepIndicator(3);
             
+            // Reset conversion status
+            conversionStatus.textContent = "Converting PDF to images...";
+            conversionStatus.className = "conversion-status";
+            
             // Simulate conversion process
             let progressValue = 0;
+            const totalSteps = 20;
             const interval = setInterval(() => {
                 progressValue += 5;
                 progress.style.width = `${progressValue}%`;
+                loadingLineInner.style.width = `${progressValue}%`;
                 
                 if (progressValue >= 100) {
                     clearInterval(interval);
@@ -1958,31 +2542,182 @@
                     // Update step indicator
                     updateStepIndicator(4);
                     
-                    // Simulate completion
+                    // Show success message
+                    conversionStatus.textContent = "Conversion completed successfully!";
+                    conversionStatus.className = "conversion-status status-success";
+                    
+                    // Generate quality options
+                    generateQualityOptions();
+                    
+                    // Show download section with animation
+                    downloadSection.classList.remove('hidden');
                     setTimeout(() => {
-                        alert('Conversion completed! In a real implementation, the images would be available for download.');
-                        progressBar.classList.add('hidden');
+                        downloadSection.classList.add('visible');
+                    }, 100);
+                    
+                    // Reset button state
+                    convertBtn.classList.remove('converting');
+                    convertBtn.disabled = false;
+                    isConverting = false;
+                    
+                    // Scroll to download section
+                    setTimeout(() => {
+                        downloadSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }, 500);
                 }
-            }, 100);
+            }, 150);
         }
 
-        function showSection(sectionId) {
+        function generateQualityOptions() {
+            qualityOptions.innerHTML = '';
+            
+            const qualityLevels = [
+                { value: 'low', label: 'Low Quality', description: 'Small file size, faster download', size: '~500KB' },
+                { value: 'medium', label: 'Medium Quality', description: 'Good balance of quality and size', size: '~1.2MB' },
+                { value: 'high', label: 'High Quality', description: 'Best quality, larger file size', size: '~2.5MB' }
+            ];
+            
+            qualityLevels.forEach((level, index) => {
+                const qualityOption = document.createElement('div');
+                qualityOption.className = 'quality-option';
+                if (index === 1) {
+                    qualityOption.classList.add('selected');
+                }
+                qualityOption.setAttribute('data-quality', level.value);
+                qualityOption.innerHTML = `
+                    <div class="quality-label">${level.label}</div>
+                    <div class="quality-description">${level.description}</div>
+                    <div class="quality-size">${level.size}</div>
+                `;
+                qualityOption.addEventListener('click', () => {
+                    document.querySelectorAll('.quality-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    qualityOption.classList.add('selected');
+                    generateDownloadButtons(level.value);
+                });
+                qualityOptions.appendChild(qualityOption);
+            });
+            
+            // Generate initial download buttons with medium quality
+            generateDownloadButtons('medium');
+        }
+
+        function generateDownloadButtons(quality) {
+            downloadButtons.innerHTML = '';
+            
+            // Generate individual download buttons for each page
+            for (let i = 1; i <= 5; i++) {
+                const format = formatSelect.value;
+                const downloadBtn = document.createElement('button');
+                downloadBtn.className = 'btn download-btn';
+                downloadBtn.innerHTML = `
+                    <i class="fas fa-download"></i>
+                    <span>Page ${i}.${format}</span>
+                `;
+                downloadBtn.addEventListener('click', () => {
+                    downloadImage(`page-${i}-${quality}.${format}`);
+                });
+                downloadButtons.appendChild(downloadBtn);
+                
+                // Add animation delay for each button
+                setTimeout(() => {
+                    downloadBtn.classList.add('visible');
+                }, i * 100);
+            }
+            
+            // Add download all button
+            const downloadAllBtn = document.createElement('button');
+            downloadAllBtn.className = 'btn download-all-btn download-btn';
+            downloadAllBtn.innerHTML = `
+                <i class="fas fa-file-archive"></i>
+                <span>Download All as ZIP</span>
+            `;
+            downloadAllBtn.addEventListener('click', () => {
+                downloadAllImages(quality);
+            });
+            downloadButtons.appendChild(downloadAllBtn);
+            
+            // Add animation for the download all button
+            setTimeout(() => {
+                downloadAllBtn.classList.add('visible');
+            }, 600);
+        }
+
+        function downloadImage(filename) {
+            // In a real implementation, this would download the actual converted image
+            // For demo purposes, we'll create a dummy file
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,This is a simulated download. In a real application, this would be your converted image.');
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function downloadAllImages(quality) {
+            // In a real implementation, this would download a ZIP file with all images
+            // For demo purposes, we'll create a dummy file
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,This is a simulated download. In a real application, this would be a ZIP file containing all your converted images.');
+            element.setAttribute('download', `converted-images-${quality}-${Date.now()}.zip`);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function showSection(sectionId, forward) {
             // Hide all sections
             pageSections.forEach(section => {
                 section.classList.remove('active');
+                // Remove animation classes
+                section.classList.remove('step-transition');
+                section.classList.remove('back-transition');
             });
             
+            // Add appropriate animation class
+            const targetSection = document.getElementById(sectionId);
+            if (forward) {
+                targetSection.classList.add('step-transition');
+                // Add to history if it's a new page
+                if (sectionId !== currentPage) {
+                    pageHistory.push(sectionId);
+                }
+            } else {
+                targetSection.classList.add('back-transition');
+                // Remove from history if going back
+                if (pageHistory.length > 1 && sectionId !== currentPage) {
+                    pageHistory.pop();
+                }
+            }
+            
             // Show the selected section
-            document.getElementById(sectionId).classList.add('active');
+            targetSection.classList.add('active');
+            
+            // Update current page
+            currentPage = sectionId;
             
             // Update active nav link
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('data-target') === sectionId) {
                     link.classList.add('active');
+                    // Add highlight animation
+                    link.classList.add('nav-highlight');
+                    setTimeout(() => link.classList.remove('nav-highlight'), 700);
                 }
             });
+            
+            // Update floating button icon and title
+            if (sectionId === 'home') {
+                floatingBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                floatingBtn.setAttribute('title', 'Back to Top');
+            } else {
+                floatingBtn.innerHTML = '<i class="fas fa-home"></i>';
+                floatingBtn.setAttribute('title', 'Back to Home');
+            }
             
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1991,7 +2726,10 @@
         function updateStepIndicator(stepNumber) {
             steps.forEach((step, index) => {
                 if (index < stepNumber) {
-                    step.classList.add('active');
+                    // Add active class with delay for animation
+                    setTimeout(() => {
+                        step.classList.add('active');
+                    }, index * 300);
                 } else {
                     step.classList.remove('active');
                 }
